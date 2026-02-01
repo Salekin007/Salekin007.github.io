@@ -15,15 +15,55 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
-      - name: Install dependencies
-        run: npm ci
+      - name: Node / npm versions and repo debug
+        run: |
+          node --version
+          npm --version
+          echo "Repository root files:"
+          ls -la
+
+      - name: Cache npm
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: npm-cache-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**/package.json') }}
+
+      - name: Install dependencies (ci if lockfile exists, else install)
+        run: |
+          if [ -f package-lock.json ]; then
+            echo "Found package-lock.json — running npm ci"
+            npm ci
+          else
+            echo "No package-lock.json found — running npm install to generate lockfile"
+            npm install
+          fi
+
+      - name: Check for generated package-lock
+        id: lockfile
+        run: |
+          if [ -f package-lock.json ]; then
+            echo "found=true" >> $GITHUB_OUTPUT
+          else
+            echo "found=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Upload generated package-lock (if present)
+        if: steps.lockfile.outputs.found == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: package-lock
+          path: package-lock.json
+
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
+
       - name: Start static server
         run: python -m http.server 8080 &
+
       - name: Run Playwright tests
         run: npx playwright test --reporter=list
         continue-on-error: false
+
       - name: Upload Playwright Report
         if: always()
         uses: actions/upload-artifact@v4
