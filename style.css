@@ -939,6 +939,13 @@ body {
 }
 
 @media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+  .container {
+    padding: 10px;
+  }
+
   .nav-menu {
     position: fixed;
     top: 80px;
@@ -1002,6 +1009,13 @@ body {
 }
 
 @media (max-width: 480px) {
+  body {
+    font-size: 12px;
+  }
+  .container {
+    padding: 5px;
+  }
+
   .hero-title {
     font-size: 2rem;
   }
