@@ -1,351 +1,362 @@
-// ============================================
-// NAVIGATION FUNCTIONALITY
-// ============================================
+// Wrap site initialization so we can run it after components are loaded
+function initSite() {
+  // ============================================
+  // NAVIGATION FUNCTIONALITY
+  // ============================================
 
-const navbar = document.getElementById('navbar');
-const navMenu = document.getElementById('nav-menu');
-const hamburger = document.getElementById('hamburger');
-const mobileOverlay = document.getElementById('mobile-overlay');
-const navLinks = document.querySelectorAll('.nav-link');
-const backToTop = document.getElementById('back-to-top');
+  const navbar = document.getElementById('navbar');
+  const navMenu = document.getElementById('nav-menu');
+  const hamburger = document.getElementById('hamburger');
+  const mobileOverlay = document.getElementById('mobile-overlay');
+  const navLinks = document.querySelectorAll('.nav-link');
+  const backToTop = document.getElementById('back-to-top');
 
-// Toggle mobile menu
-function toggleMenu() {
-  hamburger.classList.toggle('active');
-  navMenu.classList.toggle('active');
-  mobileOverlay.classList.toggle('active');
-  document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
-}
-
-hamburger.addEventListener('click', toggleMenu);
-mobileOverlay.addEventListener('click', toggleMenu);
-
-// Close mobile menu when clicking on a nav link
-navLinks.forEach(link => {
-  link.addEventListener('click', () => {
-    if (navMenu.classList.contains('active')) {
-      toggleMenu();
-    }
-  });
-});
-
-// Add scrolled class to navbar on scroll
-let lastScroll = 0;
-window.addEventListener('scroll', () => {
-  const currentScroll = window.pageYOffset;
-
-  // Add/remove scrolled class
-  if (currentScroll > 50) {
-    navbar.classList.add('scrolled');
-  } else {
-    navbar.classList.remove('scrolled');
+  // Toggle mobile menu
+  function toggleMenu() {
+    if (!hamburger || !navMenu || !mobileOverlay) return;
+    hamburger.classList.toggle('active');
+    navMenu.classList.toggle('active');
+    mobileOverlay.classList.toggle('active');
+    document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
   }
 
-  // Back to top button visibility
-  if (currentScroll > 500) {
-    backToTop.classList.add('visible');
-  } else {
-    backToTop.classList.remove('visible');
-  }
+  if (hamburger) hamburger.addEventListener('click', toggleMenu);
+  if (mobileOverlay) mobileOverlay.addEventListener('click', toggleMenu);
 
-  lastScroll = currentScroll;
-});
-
-// Back to top functionality
-backToTop.addEventListener('click', () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-});
-
-// Active link highlighting based on scroll position
-const sections = document.querySelectorAll('.section, .hero');
-
-function updateActiveLink() {
-  let current = '';
-  const scrollPosition = window.pageYOffset + 150;
-
-  sections.forEach(section => {
-    const sectionTop = section.offsetTop;
-    const sectionHeight = section.clientHeight;
-
-    if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-      current = section.getAttribute('id');
-    }
-  });
-
+  // Close mobile menu when clicking on a nav link
   navLinks.forEach(link => {
-    link.classList.remove('active');
-    if (link.getAttribute('href') === `#${current}`) {
-      link.classList.add('active');
-    }
+    link.addEventListener('click', () => {
+      if (navMenu && navMenu.classList.contains('active')) {
+        toggleMenu();
+      }
+    });
   });
-}
 
-window.addEventListener('scroll', updateActiveLink);
-updateActiveLink(); // Initial call
+  // Add scrolled class to navbar on scroll
+  let lastScroll = 0;
+  window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
 
-// Smooth scroll for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
-    const href = this.getAttribute('href');
-    if (href !== '#') {
-      e.preventDefault();
-      const target = document.querySelector(href);
-      if (target) {
-        const offset = 80; // Navbar height
-        const targetPosition = target.offsetTop - offset;
-        window.scrollTo({
-          top: targetPosition,
-          behavior: 'smooth'
-        });
+    // Add/remove scrolled class
+    if (navbar) {
+      if (currentScroll > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
       }
     }
-  });
-});
 
-// ============================================
-// SCROLL ANIMATIONS
-// ============================================
-
-const observerOptions = {
-  threshold: 0.1,
-  rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.style.opacity = '1';
-      entry.target.style.transform = 'translateY(0)';
+    // Back to top button visibility
+    if (backToTop) {
+      if (currentScroll > 500) {
+        backToTop.classList.add('visible');
+      } else {
+        backToTop.classList.remove('visible');
+      }
     }
+
+    lastScroll = currentScroll;
   });
-}, observerOptions);
 
-// Observe elements for animation
-const animatedElements = document.querySelectorAll(
-  '.tool-card, .cert-card, .timeline-item, .project-card, .contact-card, .expertise-card'
-);
-
-animatedElements.forEach((el, index) => {
-  el.style.opacity = '0';
-  el.style.transform = 'translateY(30px)';
-  el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-  el.style.transitionDelay = `${Math.min(index * 0.05, 0.3)}s`;
-  observer.observe(el);
-});
-
-// ============================================
-// SKILL BAR ANIMATIONS
-// ============================================
-
-const skillBars = document.querySelectorAll('.skill-progress');
-
-const skillObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.style.animation = 'fillBar 1.5s ease forwards';
-    }
+  // Back to top functionality
+  if (backToTop) backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   });
-}, { threshold: 0.5 });
 
-skillBars.forEach(bar => {
-  skillObserver.observe(bar);
-});
+  // Active link highlighting based on scroll position
+  const sections = document.querySelectorAll('.section, .hero');
 
-// ============================================
-// COUNTER ANIMATION FOR STATS
-// ============================================
+  function updateActiveLink() {
+    let current = '';
+    const scrollPosition = window.pageYOffset + 150;
 
-function animateCounter(element, target, duration = 2000) {
-  const start = 0;
-  const increment = target / (duration / 16);
-  let current = start;
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.clientHeight;
 
-  const updateCounter = () => {
-    current += increment;
-    if (current < target) {
-      element.textContent = Math.floor(current) + '+';
-      requestAnimationFrame(updateCounter);
-    } else {
-      element.textContent = target + '+';
-    }
+      if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+        current = section.getAttribute('id');
+      }
+    });
+
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === `#${current}`) {
+        link.classList.add('active');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', updateActiveLink);
+  updateActiveLink(); // Initial call
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      const href = this.getAttribute('href');
+      if (href !== '#') {
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) {
+          const offset = 80; // Navbar height
+          const targetPosition = target.offsetTop - offset;
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
+        }
+      }
+    });
+  });
+
+  // ============================================
+  // SCROLL ANIMATIONS
+  // ============================================
+
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
   };
 
-  updateCounter();
-}
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, observerOptions);
 
-const statNumbers = document.querySelectorAll('.stat-number');
-const statsObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
-      const target = parseInt(entry.target.textContent);
-      entry.target.classList.add('counted');
-      animateCounter(entry.target, target);
-    }
-  });
-}, { threshold: 0.5 });
+  // Observe elements for animation
+  const animatedElements = document.querySelectorAll(
+    '.tool-card, .cert-card, .timeline-item, .project-card, .contact-card, .expertise-card'
+  );
 
-statNumbers.forEach(stat => statsObserver.observe(stat));
-
-// ============================================
-// PARALLAX EFFECT (OPTIONAL)
-// ============================================
-
-// Add subtle parallax effect to hero particles
-document.addEventListener('mousemove', (e) => {
-  const particles = document.querySelectorAll('.particle');
-  const x = (e.clientX / window.innerWidth - 0.5) * 10;
-  const y = (e.clientY / window.innerHeight - 0.5) * 10;
-  particles.forEach((particle, index) => {
-    const factor = (index + 1) * 0.5;
-    particle.style.transform = `translate(${x * factor}px, ${y * factor}px)`;
-  });
-});
-
-// ============================================
-// PROJECT CARD TILT EFFECT
-// ============================================
-
-const projectCards = document.querySelectorAll('.project-card');
-
-projectCards.forEach(card => {
-  card.addEventListener('mousemove', (e) => {
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    const rotateX = (y - centerY) / 20;
-    const rotateY = (centerX - x) / 20;
-
-    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
+  animatedElements.forEach((el, index) => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(30px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    el.style.transitionDelay = `${Math.min(index * 0.05, 0.3)}s`;
+    observer.observe(el);
   });
 
-  card.addEventListener('mouseleave', () => {
-    card.style.transform = '';
+  // ============================================
+  // SKILL BAR ANIMATIONS
+  // ============================================
+
+  const skillBars = document.querySelectorAll('.skill-progress');
+
+  const skillObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.animation = 'fillBar 1.5s ease forwards';
+      }
+    });
+  }, { threshold: 0.5 });
+
+  skillBars.forEach(bar => {
+    skillObserver.observe(bar);
   });
-});
 
-// ============================================
-// TESTIMONIAL SLIDER (AUTO-ROTATE)
-// ============================================
+  // ============================================
+  // COUNTER ANIMATION FOR STATS
+  // ============================================
 
-// Testimonials section removed - placeholder for future implementation
+  function animateCounter(element, target, duration = 2000) {
+    const start = 0;
+    const increment = target / (duration / 16);
+    let current = start;
 
-// ============================================
-// CONTACT CARD COPY TO CLIPBOARD
-// ============================================
+    const updateCounter = () => {
+      current += increment;
+      if (current < target) {
+        element.textContent = Math.floor(current) + '+';
+        requestAnimationFrame(updateCounter);
+      } else {
+        element.textContent = target + '+';
+      }
+    };
 
-const emailLink = document.querySelector('a[href^="mailto:"]');
-if (emailLink) {
-  emailLink.addEventListener('click', (e) => {
-    // Just allow default behavior - opens email client
+    updateCounter();
+  }
+
+  const statNumbers = document.querySelectorAll('.stat-number');
+  const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
+        const target = parseInt(entry.target.textContent);
+        entry.target.classList.add('counted');
+        animateCounter(entry.target, target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  statNumbers.forEach(stat => statsObserver.observe(stat));
+
+  // ============================================
+  // PARALLAX EFFECT (OPTIONAL)
+  // ============================================
+
+  // Add subtle parallax effect to hero particles
+  document.addEventListener('mousemove', (e) => {
+    const particles = document.querySelectorAll('.particle');
+    const x = (e.clientX / window.innerWidth - 0.5) * 10;
+    const y = (e.clientY / window.innerHeight - 0.5) * 10;
+    particles.forEach((particle, index) => {
+      const factor = (index + 1) * 0.5;
+      particle.style.transform = `translate(${x * factor}px, ${y * factor}px)`;
+    });
   });
-}
 
-// ============================================
-// SKILL CARD INTERACTIONS
-// ============================================
+  // ============================================
+  // PROJECT CARD TILT EFFECT
+  // ============================================
 
-const toolCards = document.querySelectorAll('.tool-card');
+  const projectCards = document.querySelectorAll('.project-card');
 
-toolCards.forEach(card => {
-  card.addEventListener('click', function() {
-    // Add click feedback
-    this.style.transform = 'scale(0.95)';
-    setTimeout(() => {
-      this.style.transform = '';
-    }, 150);
+  projectCards.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const rotateX = (y - centerY) / 20;
+      const rotateY = (centerX - x) / 20;
+
+      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+    });
   });
-});
 
-// ============================================
-// PREVENT DEFAULT FOR EMPTY LINKS
-// ============================================
+  // ============================================
+  // TESTIMONIAL SLIDER (AUTO-ROTATE)
+  // ============================================
 
-document.querySelectorAll('a[href="#"]').forEach(anchor => {
-  anchor.addEventListener('click', (e) => e.preventDefault());
-});
+  // Testimonials section removed - placeholder for future implementation
 
-// ============================================
-// MODAL (TEST PLAN) HANDLERS - Lead SQA interactions
-// ============================================
+  // ============================================
+  // CONTACT CARD COPY TO CLIPBOARD
+  // ============================================
 
-const modalButtons = document.querySelectorAll('.view-testplan');
-const modals = document.querySelectorAll('.modal');
+  const emailLink = document.querySelector('a[href^="mailto:"]');
+  if (emailLink) {
+    emailLink.addEventListener('click', (e) => {
+      // Just allow default behavior - opens email client
+    });
+  }
 
-function openModal(id, triggerButton) {
-  const modal = document.getElementById(id);
-  if (!modal) return;
-  modal.removeAttribute('hidden');
-  modal.setAttribute('aria-hidden', 'false');
-  triggerButton && triggerButton.setAttribute('aria-expanded','true');
-  // minimal focus management
-  const focusable = modal.querySelectorAll('a, button, [tabindex]:not([tabindex="-1"])');
-  if (focusable.length) focusable[0].focus();
-}
+  // ============================================
+  // SKILL CARD INTERACTIONS
+  // ============================================
 
-function closeModal(modal, triggerButton) {
-  if (!modal) return;
-  modal.setAttribute('hidden', '');
-  modal.setAttribute('aria-hidden', 'true');
-  triggerButton && triggerButton.setAttribute('aria-expanded','false');
-  triggerButton && triggerButton.focus();
-}
+  const toolCards = document.querySelectorAll('.tool-card');
 
-modalButtons.forEach(btn => {
-  btn.addEventListener('click', (e) => {
-    const project = btn.getAttribute('data-project');
-    openModal(`modal-${project}`, btn);
+  toolCards.forEach(card => {
+    card.addEventListener('click', function() {
+      // Add click feedback
+      this.style.transform = 'scale(0.95)';
+      setTimeout(() => {
+        this.style.transform = '';
+      }, 150);
+    });
   });
-});
 
-modals.forEach(modal => {
-  modal.addEventListener('click', (e) => {
-    if (e.target.matches('[data-close], .modal-backdrop')) {
-      const btn = document.querySelector(`.view-testplan[data-project="${modal.id.replace('modal-','')}"]`);
-      closeModal(modal, btn);
-    }
+  // ============================================
+  // PREVENT DEFAULT FOR EMPTY LINKS
+  // ============================================
+
+  document.querySelectorAll('a[href="#"]').forEach(anchor => {
+    anchor.addEventListener('click', (e) => e.preventDefault());
   });
-});
 
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') {
-    modals.forEach(modal => {
-      if (!modal.hasAttribute('hidden')) {
+  // ============================================
+  // MODAL (TEST PLAN) HANDLERS - Lead SQA interactions
+  // ============================================
+
+  const modalButtons = document.querySelectorAll('.view-testplan');
+  const modals = document.querySelectorAll('.modal');
+
+  function openModal(id, triggerButton) {
+    const modal = document.getElementById(id);
+    if (!modal) return;
+    modal.removeAttribute('hidden');
+    modal.setAttribute('aria-hidden', 'false');
+    triggerButton && triggerButton.setAttribute('aria-expanded','true');
+    // minimal focus management
+    const focusable = modal.querySelectorAll('a, button, [tabindex]:not([tabindex="-1"])');
+    if (focusable.length) focusable[0].focus();
+  }
+
+  function closeModal(modal, triggerButton) {
+    if (!modal) return;
+    modal.setAttribute('hidden', '');
+    modal.setAttribute('aria-hidden', 'true');
+    triggerButton && triggerButton.setAttribute('aria-expanded','false');
+    triggerButton && triggerButton.focus();
+  }
+
+  modalButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const project = btn.getAttribute('data-project');
+      openModal(`modal-${project}`, btn);
+    });
+  });
+
+  modals.forEach(modal => {
+    modal.addEventListener('click', (e) => {
+      if (e.target.matches('[data-close], .modal-backdrop')) {
         const btn = document.querySelector(`.view-testplan[data-project="${modal.id.replace('modal-','')}"]`);
         closeModal(modal, btn);
       }
     });
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      modals.forEach(modal => {
+        if (!modal.hasAttribute('hidden')) {
+          const btn = document.querySelector(`.view-testplan[data-project="${modal.id.replace('modal-','')}"]`);
+          closeModal(modal, btn);
+        }
+      });
+    }
+  });
+
+
+}
+
+// Initialize when components are ready or on DOMContentLoaded
+const hasComponents = !!document.querySelector('[data-component], [data-src]');
+if (hasComponents) {
+  document.addEventListener('components:loaded', initSite, { once: true });
+} else {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSite, { once: true });
+  } else {
+    initSite();
   }
-});
+}
 
-// ============================================
-// LOADING SCREEN - Hide on window load (with fallback)
-// ============================================
-
-const loadingScreen = document.getElementById('loading-screen');
-
-function hideLoadingScreen() {
+// Robust loading-screen dismiss: works whether loading component is present before or after components load
+function hideLoadingScreenIfPresent() {
+  const loadingScreen = document.getElementById('loading-screen');
   if (!loadingScreen) return;
-  // Add hidden class (CSS handles fade) then remove from DOM to avoid focus traps
   loadingScreen.classList.add('hidden');
   setTimeout(() => {
     if (loadingScreen.parentNode) loadingScreen.parentNode.removeChild(loadingScreen);
   }, 700);
 }
 
-// Primary hide trigger: when page fully loads
-window.addEventListener('load', () => {
-  // Give the loading animation a moment to finish for a smooth UX
-  setTimeout(hideLoadingScreen, 600);
-});
-
-// Safety fallback: ensure loading screen is dismissed after 5s if load event doesn't fire
-setTimeout(() => {
-  if (loadingScreen && !loadingScreen.classList.contains('hidden')) {
-    hideLoadingScreen();
-  }
-}, 5000);
+// Call on window load
+window.addEventListener('load', () => setTimeout(hideLoadingScreenIfPresent, 600));
+// Call when components loaded (in case the loading component was injected)
+document.addEventListener('components:loaded', hideLoadingScreenIfPresent, { once: true });
+// Safety fallback
+setTimeout(hideLoadingScreenIfPresent, 5000);
 
 // ============================================
 // CONSOLE MESSAGE

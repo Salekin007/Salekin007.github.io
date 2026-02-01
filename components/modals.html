@@ -1,0 +1,57 @@
+<!-- Modals component - components/modals.html -->
+<div class="modal" id="modal-his" role="dialog" aria-modal="true" aria-labelledby="modal-his-title" hidden>
+  <div class="modal-backdrop" data-close></div>
+  <div class="modal-panel" role="document">
+    <button class="modal-close" aria-label="Close modal" data-close>&times;</button>
+    <div class="modal-header">
+      <h3 id="modal-his-title">Hospital Information System — Test Plan</h3>
+      <a href="test-plans/his-test-plan.md" download class="btn btn-primary">Download Test Plan</a>
+    </div>
+    <div class="modal-body">
+      <section class="test-plan-summary">
+        <p><strong>Scope:</strong> OPD, IPD, Billing, EMR, LIS, Pharmacy modules.</p>
+        <p><strong>Environments:</strong> QA (staging), Pre-prod, CI-runner.</p>
+        <p><strong>Key Risks:</strong> Data privacy, multi-tenancy isolation, peak load handling.</p>
+      </section>
+
+      <section class="test-scenarios">
+        <h4>Priority Test Scenarios (examples)</h4>
+        <ol>
+          <li data-test-id="his-s1">Patient registration — create patient record, validate mandatory fields, duplicate prevention.</li>
+          <li data-test-id="his-s2">Billing flow — create invoice, discount logic, insurance claims, end-to-end reconciliation.</li>
+        </ol>
+      </section>
+
+    </div>
+  </div>
+</div>
+
+<!-- LMS modal -->
+<div class="modal" id="modal-lms" role="dialog" aria-modal="true" aria-labelledby="modal-lms-title" hidden>
+  <div class="modal-backdrop" data-close></div>
+  <div class="modal-panel" role="document">
+    <button class="modal-close" aria-label="Close modal" data-close>&times;</button>
+    <div class="modal-header">
+      <h3 id="modal-lms-title">LMS — Test Plan</h3>
+      <a href="test-plans/lms-test-plan.md" download class="btn btn-primary">Download Test Plan</a>
+    </div>
+    <div class="modal-body">
+      <p>Summary content for LMS test plan.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Exam modal (if needed) -->
+<div class="modal" id="modal-exam" role="dialog" aria-modal="true" aria-labelledby="modal-exam-title" hidden>
+  <div class="modal-backdrop" data-close></div>
+  <div class="modal-panel" role="document">
+    <button class="modal-close" aria-label="Close modal" data-close>&times;</button>
+    <div class="modal-header">
+      <h3 id="modal-exam-title">Exam Automation System — Test Plan</h3>
+      <a href="test-plans/exam-test-plan.md" download class="btn btn-primary">Download Test Plan</a>
+    </div>
+    <div class="modal-body">
+      <p>Summary content for Exam test plan.</p>
+    </div>
+  </div>
+</div>

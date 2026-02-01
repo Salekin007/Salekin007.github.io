@@ -1,0 +1,70 @@
+<!-- Projects component - components/projects.html -->
+<section id="projects" class="section projects">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Case Studies</span>
+      <h2 class="section-title">Featured Projects</h2>
+      <p class="section-subtitle">Showcasing impact-driven quality engineering initiatives</p>
+    </div>
+
+    <div class="projects-grid">
+      <!-- HIS Card -->
+      <div class="project-card featured">
+        <div class="project-header">
+          <div class="project-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+            <i class="fas fa-hospital"></i>
+          </div>
+          <div class="project-badge"><i class="fas fa-star"></i> Featured</div>
+          <span class="test-badge" title="Test plan available">Test Plan</span>
+        </div>
+        <div class="project-content">
+          <span class="project-type">Enterprise Healthcare Platform</span>
+          <h3>Hospital Information System (HIS)</h3>
+          <p class="project-description">Comprehensive hospital management system covering OPD, IPD, Billing, EMR, LIS, and Pharmacy modules serving 50,000+ patients daily.</p>
+          <div class="project-stats"> <!-- stats omitted for brevity --> </div>
+          <div class="project-responsibilities"> <!-- responsibilities omitted --> </div>
+          <div class="project-outcomes"> <!-- outcomes omitted --> </div>
+          <div class="project-actions">
+            <button class="btn btn-outline view-testplan" data-project="his" aria-controls="modal-his" aria-expanded="false">View Test Plan</button>
+            <a href="test-plans/his-test-plan.md" class="btn btn-secondary" download data-test-id="download-his">Download Test Plan</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- LMS Card -->
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);"><i class="fas fa-graduation-cap"></i></div>
+          <span class="test-badge" title="Test plan available">Test Plan</span>
+        </div>
+        <div class="project-content">
+          <span class="project-type">EdTech Platform</span>
+          <h3>Learning Management System (LMS)</h3>
+          <p class="project-description">Online learning platform featuring virtual classrooms, real-time assessments, progress tracking, and certification management.</p>
+          <div class="project-actions">
+            <button class="btn btn-outline view-testplan" data-project="lms" aria-controls="modal-lms" aria-expanded="false">View Test Plan</button>
+            <a href="test-plans/lms-test-plan.md" class="btn btn-secondary" download data-test-id="download-lms">Download Test Plan</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- IEIMS Card -->
+      <div class="project-card featured">
+        <div class="project-header">
+          <div class="project-image" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);"><i class="fas fa-chalkboard-user"></i></div>
+          <div class="project-badge"><i class="fas fa-star"></i> Featured</div>
+          <span class="test-badge">Test Plan</span>
+        </div>
+        <div class="project-content">
+          <span class="project-type">Government Platform | Nationwide Deployment</span>
+          <h3>Integrated Education Information Management System (IEIMS)</h3>
+          <p class="project-description">Nationwide government education platform supporting academic operations, institutional reporting, user management, and data-driven decision-making.</p>
+          <div class="project-actions">
+            <button class="btn btn-outline view-testplan" data-project="lms" aria-controls="modal-lms" aria-expanded="false">View Test Plan</button>
+            <a href="test-plans/lms-test-plan.md" class="btn btn-secondary" download data-test-id="download-lms">Download Test Plan</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

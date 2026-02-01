@@ -1,0 +1,42 @@
+<!-- QA Hub component - components/qa.html -->
+<section id="qa" class="section qa">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">QA Hub</span>
+      <h2 class="section-title">Project Test Plans & QA Artifacts</h2>
+      <p class="section-subtitle">Concise SQA overview, downloadable test plans, and links to artifacts for each featured project.</p>
+    </div>
+
+    <div class="qa-grid">
+      <div class="qa-card">
+        <h3>Hospital Information System (HIS)</h3>
+        <p>Enterprise healthcare platform — high availability, high security, complex workflows.</p>
+        <div class="qa-actions">
+          <button class="btn btn-outline view-testplan" data-project="his" aria-controls="modal-his">Open Test Plan</button>
+          <a href="test-plans/his-test-plan.md" class="btn btn-secondary" download>Download</a>
+        </div>
+      </div>
+
+      <div class="qa-card">
+        <h3>Learning Management System (LMS)</h3>
+        <p>EdTech platform with live classes, assessments, and mobile apps.</p>
+        <div class="qa-actions">
+          <button class="btn btn-outline view-testplan" data-project="lms" aria-controls="modal-lms">Open Test Plan</button>
+          <a href="test-plans/lms-test-plan.md" class="btn btn-secondary" download>Download</a>
+        </div>
+      </div>
+
+      <div class="qa-card">
+        <h3>Integrated Education Information Management System (IEIMS)</h3>
+        <p>Secure, large-scale government education platform designed for nationwide academic data management and reporting.</p>
+        <div class="qa-actions">
+          <button class="btn btn-outline view-testplan" data-project="lms" aria-controls="modal-lms">Open Test Plan</button>
+          <a href="test-plans/lms-test-plan.md" class="btn btn-secondary" download>Download</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modals are separate components to allow easy editing -->
+    <div id="qa-modals-placeholder"></div>
+  </div>
+</section>
