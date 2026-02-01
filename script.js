@@ -122,7 +122,7 @@ const observer = new IntersectionObserver((entries) => {
 
 // Observe elements for animation
 const animatedElements = document.querySelectorAll(
-  '.skill-category, .tool-card, .cert-card, .timeline-item, .project-card, .testimonial-card, .contact-card, .about-card, .expertise-item'
+  '.tool-card, .cert-card, .timeline-item, .project-card, .contact-card, .expertise-card'
 );
 
 animatedElements.forEach((el, index) => {
@@ -187,17 +187,18 @@ const statsObserver = new IntersectionObserver((entries) => {
 statNumbers.forEach(stat => statsObserver.observe(stat));
 
 // ============================================
-// TYPING EFFECT FOR HERO (OPTIONAL)
+// PARALLAX EFFECT (OPTIONAL)
 // ============================================
 
-// Add subtle parallax effect to hero
+// Add subtle parallax effect to hero particles
 document.addEventListener('mousemove', (e) => {
-  const heroPattern = document.querySelector('.hero-pattern');
-  if (heroPattern) {
-    const x = (e.clientX / window.innerWidth - 0.5) * 20;
-    const y = (e.clientY / window.innerHeight - 0.5) * 20;
-    heroPattern.style.transform = `translate(${x}px, ${y}px)`;
-  }
+  const particles = document.querySelectorAll('.particle');
+  const x = (e.clientX / window.innerWidth - 0.5) * 10;
+  const y = (e.clientY / window.innerHeight - 0.5) * 10;
+  particles.forEach((particle, index) => {
+    const factor = (index + 1) * 0.5;
+    particle.style.transform = `translate(${x * factor}px, ${y * factor}px)`;
+  });
 });
 
 // ============================================
@@ -228,22 +229,7 @@ projectCards.forEach(card => {
 // TESTIMONIAL SLIDER (AUTO-ROTATE)
 // ============================================
 
-const testimonialCards = document.querySelectorAll('.testimonial-card');
-let currentTestimonial = 0;
-
-function rotateTestimonials() {
-  testimonialCards.forEach((card, index) => {
-    card.style.opacity = index === currentTestimonial ? '1' : '0.7';
-    card.style.transform = index === currentTestimonial ? 'scale(1)' : 'scale(0.95)';
-  });
-
-  currentTestimonial = (currentTestimonial + 1) % testimonialCards.length;
-}
-
-// Only auto-rotate if there are multiple testimonials
-if (testimonialCards.length > 1) {
-  setInterval(rotateTestimonials, 5000);
-}
+// Testimonials section removed - placeholder for future implementation
 
 // ============================================
 // CONTACT CARD COPY TO CLIPBOARD

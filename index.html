@@ -17,7 +17,7 @@
   <!-- Loading Screen -->
   <div class="loading-screen" id="loading-screen">
     <div class="loading-content">
-      <div class="loading-logo">MS</div>
+      <div class="loading-logo"><img src="images/file.jpg" alt="My Photo" class="footer-img"></div>
       <div class="loading-bar">
         <div class="loading-progress"></div>
       </div>
@@ -45,7 +45,6 @@
         <li><a href="#experience" class="nav-link"><i class="fas fa-briefcase"></i> Experience</a></li>
         <li><a href="#qa" class="nav-link" data-test-id="nav-qa"><i class="fas fa-vial"></i> QA</a></li>
         <li><a href="#projects" class="nav-link"><i class="fas fa-rocket"></i> Projects</a></li>
-        <li><a href="#testimonials" class="nav-link"><i class="fas fa-quote-left"></i> Testimonials</a></li>
         <li><a href="#contact" class="nav-link"><i class="fas fa-paper-plane"></i> Contact</a></li>
       </ul>
       <div class="nav-actions">
@@ -145,7 +144,7 @@
           <span>View Case Studies</span>
           <i class="fas fa-eye"></i>
         </a>
-        <a href="#" class="btn btn-outline" download>
+        <a href="assets/NewCV.pdf" class="btn btn-outline" download>
           <span>Download Resume</span>
           <i class="fas fa-download"></i>
         </a>
@@ -312,7 +311,7 @@
                 <i class="fas fa-briefcase"></i>
                 <div>
                   <span class="info-label">Current Role</span>
-                  <span class="info-value">Senior SQA Engineer @ EATL</span>
+                  <span class="info-value">SQA Engineer @ EATL</span>
                 </div>
               </div>
               <div class="info-item">
@@ -923,10 +922,10 @@
       <div class="timeline">
         <div class="timeline-item current">
           <div class="timeline-dot"></div>
-          <div class="timeline-date">2022 - Present</div>
+          <div class="timeline-date">2021 - Present</div>
           <div class="timeline-content">
             <div class="job-header">
-              <h3>Senior SQA Engineer (Team Lead)</h3>
+              <h3>Senior SQA Engineer</h3>
               <span class="company">Ethics Advanced Technology Ltd (EATL)</span>
               <span class="location"><i class="fas fa-map-marker-alt"></i> Dhaka, Bangladesh</span>
             </div>
@@ -969,11 +968,11 @@
 
         <div class="timeline-item">
           <div class="timeline-dot"></div>
-          <div class="timeline-date">2021 - 2022</div>
+          <div class="timeline-date">2019 - 2020</div>
           <div class="timeline-content">
             <div class="job-header">
               <h3>SQA Engineer</h3>
-              <span class="company">Tech Solutions Ltd</span>
+              <span class="company">One Information & Communications Technology Ltd.</span>
               <span class="location"><i class="fas fa-map-marker-alt"></i> Dhaka, Bangladesh</span>
             </div>
             <p class="job-summary">Responsible for manual and automation testing for web and mobile applications, ensuring high-quality deliverables.</p>
@@ -987,7 +986,7 @@
           </div>
         </div>
 
-        <div class="timeline-item">
+        <!-- <div class="timeline-item">
           <div class="timeline-dot"></div>
           <div class="timeline-date">2020 - 2021</div>
           <div class="timeline-content">
@@ -1004,7 +1003,7 @@
               <li>Gained hands-on experience with testing tools and defect tracking systems</li>
             </ul>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </section>
@@ -1137,58 +1136,59 @@
           </div>
         </div>
 
-        <div class="project-card">
-          <div class="project-header">
-            <div class="project-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
-              <i class="fas fa-file-alt"></i>
-            </div>
-            <span class="test-badge" title="Test plan available">Test Plan</span>
-          </div>
-          <div class="project-content">
-            <span class="project-type">Assessment Platform</span>
-            <h3>Exam Automation System</h3>
-            <p class="project-description">
-              Secure, high-stakes examination platform with automated question generation, AI-powered proctoring, and real-time result processing.
-            </p>
-            <div class="project-stats">
-              <div class="project-stat">
-                <i class="fas fa-shield-alt"></i>
-                <div>
-                  <span class="stat-value">Bank</span>
-                  <span class="stat-label">Grade Security</span>
-                </div>
-              </div>
-              <div class="project-stat">
-                <i class="fas fa-users"></i>
-                <div>
-                  <span class="stat-value">5000+</span>
-                  <span class="stat-label">Test Takers</span>
-                </div>
-              </div>
-              <div class="project-stat">
-                <i class="fas fa-clock"></i>
-                <div>
-                  <span class="stat-value">&lt;1s</span>
-                  <span class="stat-label">Response</span>
-                </div>
-              </div>
-            </div>
-            <div class="project-responsibilities">
-              <h4>Key Contributions:</h4>
-              <ul>
-                <li>Security testing preventing cheating and unauthorized access</li>
-                <li>Load testing for 5000+ concurrent exam takers</li>
-                <li>Automated test data generation for various exam scenarios</li>
-                <li>Real-time system monitoring during live exams</li>
-              </ul>
-            </div>
+        <div class="project-card featured">
+  <div class="project-header">
+    <div class="project-image" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);">
+      <i class="fas fa-university"></i>
+    </div>
+    <span class="test-badge">Test Plan</span>
+  </div>
 
-            <div class="project-actions">
-              <button class="btn btn-outline view-testplan" data-project="exam" aria-controls="modal-exam" aria-expanded="false">View Test Plan</button>
-              <a href="test-plans/exam-test-plan.md" class="btn btn-secondary" download>Download Test Plan</a>
-            </div>
-          </div>
+  <div class="project-content">
+    <span class="project-type">Government Platform | Nationwide Deployment</span>
+    <h3>Integrated Education Information Management System (IEIMS)</h3>
+
+    <p class="project-description">
+      Nationwide government education platform supporting academic operations,
+      institutional reporting, user management, and data-driven decision-making.
+    </p>
+
+    <div class="project-stats">
+      <div class="project-stat">
+        <i class="fas fa-cubes"></i>
+        <div>
+          <span class="stat-value">10+</span>
+          <span class="stat-label">Core Modules</span>
         </div>
+      </div>
+      <div class="project-stat">
+        <i class="fas fa-bug"></i>
+        <div>
+          <span class="stat-value">450+</span>
+          <span class="stat-label">Defects Logged</span>
+        </div>
+      </div>
+      <div class="project-stat">
+        <i class="fas fa-map-marked-alt"></i>
+        <div>
+          <span class="stat-value">Nationwide</span>
+          <span class="stat-label">Deployment</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-responsibilities">
+      <h4>QA Responsibilities:</h4>
+      <ul>
+        <li>Led QA activities across 10+ mission-critical government modules</li>
+        <li>Identified, logged, and verified 450+ medium and high-severity defects</li>
+        <li>Performed risk-based regression testing to stabilize major releases</li>
+        <li>Validated large-scale education data accuracy and reporting integrity</li>
+        <li>Collaborated with development and government stakeholders during UAT</li>
+      </ul>
+    </div>
+  </div>
+</div>
       </div>
     </div>
   </section>
@@ -1222,8 +1222,8 @@
         </div>
 
         <div class="qa-card">
-          <h3>Exam Automation System</h3>
-          <p>Secure, high-stakes exam platform built for scale and integrity.</p>
+          <h3>Integrated Education Information Management System (IEIMS)</h3>
+          <p>Secure, large-scale government education platform designed for nationwide academic data management, reporting, and institutional integration.</p>
           <div class="qa-actions">
             <button class="btn btn-outline view-testplan" data-project="exam" aria-controls="modal-exam">Open Test Plan</button>
             <a href="test-plans/exam-test-plan.md" class="btn btn-secondary" download>Download</a>
@@ -1338,106 +1338,6 @@
 
   </section>
 
-  <!-- Testimonials Section -->
-  <section id="testimonials" class="section testimonials">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">Recommendations</span>
-        <h2 class="section-title">What People Say</h2>
-        <p class="section-subtitle">Feedback from colleagues, managers, and stakeholders</p>
-      </div>
-
-      <div class="testimonials-slider">
-        <div class="testimonial-card active" data-index="0">
-          <div class="testimonial-quote">
-            <i class="fas fa-quote-left"></i>
-          </div>
-          <div class="testimonial-content">
-            <p class="testimonial-text">
-              "Md. Sirajus is an exceptional QA leader. His strategic approach to quality transformation has been instrumental
-              in improving our product quality by 60%. His ability to build and lead high-performing teams is remarkable.
-              Under his leadership, we achieved 70% automation coverage and reduced our release cycle by 40%."
-            </p>
-            <div class="testimonial-author">
-              <div class="author-avatar">AR</div>
-              <div class="author-info">
-                <span class="author-name">Ahmed Rahman</span>
-                <span class="author-role">Project Manager, EATL</span>
-                <div class="author-rating">
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="testimonial-card" data-index="1">
-          <div class="testimonial-quote">
-            <i class="fas fa-quote-left"></i>
-          </div>
-          <div class="testimonial-content">
-            <p class="testimonial-text">
-              "Working with Sirajus was transformative for our development process. His deep understanding of testing
-              methodologies, combined with his collaborative approach, made our software releases much more reliable.
-              He doesn't just find bugs - he helps prevent them through shift-left practices and process improvements."
-            </p>
-            <div class="testimonial-author">
-              <div class="author-avatar">FA</div>
-              <div class="author-info">
-                <span class="author-name">Fatima Akter</span>
-                <span class="author-role">Lead Developer, Tech Solutions</span>
-                <div class="author-rating">
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="testimonial-card" data-index="2">
-          <div class="testimonial-quote">
-            <i class="fas fa-quote-left"></i>
-          </div>
-          <div class="testimonial-content">
-            <p class="testimonial-text">
-              "Sirajus built our entire automation framework from scratch. The ROI was immediate - regression time
-              dropped by 65%, we caught critical issues we would have missed, and team productivity increased significantly.
-              His mentorship helped our junior engineers grow into skilled automation engineers. Highly recommend!"
-            </p>
-            <div class="testimonial-author">
-              <div class="author-avatar">KH</div>
-              <div class="author-info">
-                <span class="author-name">Karim Hassan</span>
-                <span class="author-role">CTO, Digital Innovation Hub</span>
-                <div class="author-rating">
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star-half-alt"></i>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="testimonials-nav">
-        <button class="nav-dot active" data-index="0"></button>
-        <button class="nav-dot" data-index="1"></button>
-        <button class="nav-dot" data-index="2"></button>
-      </div>
-    </div>
-  </section>
-
   <!-- Certifications Section -->
   <section class="section certifications">
     <div class="container">
@@ -1452,10 +1352,10 @@
             <i class="fas fa-certificate"></i>
           </div>
           <div class="cert-content">
-            <h3>ISTQB Certified Tester</h3>
-            <p class="cert-detail">Foundation Level</p>
-            <p class="cert-issuer">International Software Testing Qualifications Board</p>
-            <span class="cert-year">2023</span>
+            <h3>CI/CD for Test Automation: Jenkins & GitHub Actions</h3>
+            <p class="cert-detail">Credential ID: UC-87513b7a-6417-436d-b830-673d962ae9cd</p>
+            <p class="cert-issuer">Udemy</p>
+            <span class="cert-year">Issued Oct 2025</span>
           </div>
         </div>
 
@@ -1464,10 +1364,10 @@
             <i class="fas fa-award"></i>
           </div>
           <div class="cert-content">
-            <h3>Agile Scrum Master</h3>
-            <p class="cert-detail">Certified Scrum Master (CSM)</p>
-            <p class="cert-issuer">Scrum Alliance</p>
-            <span class="cert-year">2022</span>
+            <h3>MasterClass Software Testing with Jira & Agile - Be a QA Lead</h3>
+            <p class="cert-detail">Expired Mar 2025</p>
+            <p class="cert-issuer">Udemy</p>
+            <span class="cert-year">Issued Dec 2024</span>
           </div>
         </div>
 
@@ -1476,10 +1376,34 @@
             <i class="fas fa-graduation-cap"></i>
           </div>
           <div class="cert-content">
+            <h3>Software Testing Tutorial</h3>
+            <p class="cert-detail">Course Completion Certificate</p>
+            <p class="cert-issuer">Great Learning</p>
+            <span class="cert-year">Issued Oct 2024</span>
+          </div>
+        </div>
+
+        <div class="cert-card">
+          <div class="cert-icon">
+            <i class="fas fa-certificate"></i>
+          </div>
+          <div class="cert-content">
+            <h3>Playwright Python Automation Testing - From Zero to Expert</h3>
+            <p class="cert-detail">Automation Testing Specialization</p>
+            <p class="cert-issuer">Udemy</p>
+            <span class="cert-year">Credential Available</span>
+          </div>
+        </div>
+
+        <div class="cert-card">
+          <div class="cert-icon">
+            <i class="fas fa-university"></i>
+          </div>
+          <div class="cert-content">
             <h3>Bachelor of Science</h3>
             <p class="cert-detail">Computer Science & Engineering</p>
-            <p class="cert-issuer">University of Dhaka</p>
-            <span class="cert-year">2020</span>
+            <p class="cert-issuer">American International University-Bangladesh (AIUB)</p>
+            <span class="cert-year">Graduated</span>
           </div>
         </div>
       </div>
@@ -1515,7 +1439,7 @@
               </div>
               <div class="contact-details">
                 <span class="contact-label">Phone</span>
-                <a href="tel:+8801234567890">+880 123-456-7890</a>
+                <a href="tel:+8801234567890">+8801886280900</a>
               </div>
             </div>
 
@@ -1572,7 +1496,7 @@
           <div class="contact-cta">
             <h3>Download My Resume</h3>
             <p>Get a detailed overview of my experience, skills, and achievements</p>
-            <a href="#" class="btn btn-primary" download>
+            <a href="assets/NewCV.pdf" class="btn btn-primary" download>
               <i class="fas fa-download"></i>
               <span>Download CV</span>
             </a>
@@ -1587,9 +1511,9 @@
     <div class="container">
       <div class="footer-content">
         <div class="footer-brand">
-          <div class="footer-logo">MS</div>
+          <div class="footer-logo"><img src="images/file.jpg" alt="My Photo" class="footer-img"></div>
           <h3>Md. Sirajus Salekin</h3>
-          <p>Lead SQA Engineer | Quality Engineering Leader</p>
+          <p>SQA Engineer | Quality Engineering Leader</p>
         </div>
         <div class="footer-social">
           <a href="https://github.com/Salekin007" target="_blank" aria-label="GitHub">
