@@ -281,6 +281,59 @@ document.querySelectorAll('a[href="#"]').forEach(anchor => {
 });
 
 // ============================================
+// MODAL (TEST PLAN) HANDLERS - Lead SQA interactions
+// ============================================
+
+const modalButtons = document.querySelectorAll('.view-testplan');
+const modals = document.querySelectorAll('.modal');
+
+function openModal(id, triggerButton) {
+  const modal = document.getElementById(id);
+  if (!modal) return;
+  modal.removeAttribute('hidden');
+  modal.setAttribute('aria-hidden', 'false');
+  triggerButton && triggerButton.setAttribute('aria-expanded','true');
+  // minimal focus management
+  const focusable = modal.querySelectorAll('a, button, [tabindex]:not([tabindex="-1"])');
+  if (focusable.length) focusable[0].focus();
+}
+
+function closeModal(modal, triggerButton) {
+  if (!modal) return;
+  modal.setAttribute('hidden', '');
+  modal.setAttribute('aria-hidden', 'true');
+  triggerButton && triggerButton.setAttribute('aria-expanded','false');
+  triggerButton && triggerButton.focus();
+}
+
+modalButtons.forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    const project = btn.getAttribute('data-project');
+    openModal(`modal-${project}`, btn);
+  });
+});
+
+modals.forEach(modal => {
+  modal.addEventListener('click', (e) => {
+    if (e.target.matches('[data-close], .modal-backdrop')) {
+      const btn = document.querySelector(`.view-testplan[data-project="${modal.id.replace('modal-','')}"]`);
+      closeModal(modal, btn);
+    }
+  });
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    modals.forEach(modal => {
+      if (!modal.hasAttribute('hidden')) {
+        const btn = document.querySelector(`.view-testplan[data-project="${modal.id.replace('modal-','')}"]`);
+        closeModal(modal, btn);
+      }
+    });
+  }
+});
+
+// ============================================
 // CONSOLE MESSAGE
 // ============================================
 
