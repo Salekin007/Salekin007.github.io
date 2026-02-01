@@ -320,6 +320,34 @@ document.addEventListener('keydown', (e) => {
 });
 
 // ============================================
+// LOADING SCREEN - Hide on window load (with fallback)
+// ============================================
+
+const loadingScreen = document.getElementById('loading-screen');
+
+function hideLoadingScreen() {
+  if (!loadingScreen) return;
+  // Add hidden class (CSS handles fade) then remove from DOM to avoid focus traps
+  loadingScreen.classList.add('hidden');
+  setTimeout(() => {
+    if (loadingScreen.parentNode) loadingScreen.parentNode.removeChild(loadingScreen);
+  }, 700);
+}
+
+// Primary hide trigger: when page fully loads
+window.addEventListener('load', () => {
+  // Give the loading animation a moment to finish for a smooth UX
+  setTimeout(hideLoadingScreen, 600);
+});
+
+// Safety fallback: ensure loading screen is dismissed after 5s if load event doesn't fire
+setTimeout(() => {
+  if (loadingScreen && !loadingScreen.classList.contains('hidden')) {
+    hideLoadingScreen();
+  }
+}, 5000);
+
+// ============================================
 // CONSOLE MESSAGE
 // ============================================
 

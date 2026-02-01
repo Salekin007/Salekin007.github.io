@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
@@ -27,13 +28,13 @@
 
   <!-- Cursor Effect -->
   <div class="cursor" id="cursor"></div>
-  <div class="cursor-follower" id="cursor-follower"></div>
+  <!-- <div class="cursor-follower" id="cursor-follower"></div> -->
 
   <!-- Navigation -->
   <nav class="navbar" id="navbar">
     <div class="nav-container">
       <a href="#home" class="nav-logo">
-        <span class="logo-text">MS</span>
+        <span class="logo-text"> <img src="images/file.jpg" alt="Md. Sirajus Salekin" class="footer-img"></span>
         <span class="logo-dot"></span>
       </a>
       <ul class="nav-menu" id="nav-menu">
@@ -1023,9 +1024,9 @@
             <div class="project-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
               <i class="fas fa-hospital"></i>
             </div>
-            <div class="project-badge">
+            <!-- <div class="project-badge">
               <i class="fas fa-star"></i> Featured
-            </div>
+            </div> -->
             <span class="test-badge" title="Test plan available">Test Plan</span>
           </div>
           <div class="project-content">
@@ -1128,6 +1129,14 @@
                 <li>Mobile app testing across iOS and Android platforms</li>
               </ul>
             </div>
+            <div class="project-outcomes">
+              <h4>Business Impact:</h4>
+              <div class="outcome-tags">
+                <span class="outcome positive"><i class="fas fa-arrow-up"></i> 65% Faster Releases</span>
+                <span class="outcome positive"><i class="fas fa-arrow-down"></i> 50% Fewer Bugs</span>
+                <span class="outcome positive"><i class="fas fa-check"></i> 99.9% Uptime</span>
+              </div>
+            </div>
 
             <div class="project-actions">
               <button class="btn btn-outline view-testplan" data-project="lms" aria-controls="modal-lms" aria-expanded="false">View Test Plan</button>
@@ -1139,8 +1148,12 @@
         <div class="project-card featured">
   <div class="project-header">
     <div class="project-image" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);">
-      <i class="fas fa-university"></i>
-    </div>
+      <i class="fas fa-chalkboard-user"></i>
+      </div>
+      <div class="project-badge">
+              <i class="fas fa-star"></i> Featured
+            </div>
+    
     <span class="test-badge">Test Plan</span>
   </div>
 
@@ -1187,6 +1200,18 @@
         <li>Collaborated with development and government stakeholders during UAT</li>
       </ul>
     </div>
+    <div class="project-outcomes">
+              <h4>Business Impact:</h4>
+              <div class="outcome-tags">
+                <span class="outcome positive"><i class="fas fa-arrow-up"></i> 65% Faster Releases</span>
+                <span class="outcome positive"><i class="fas fa-arrow-down"></i> 50% Fewer Bugs</span>
+                <span class="outcome positive"><i class="fas fa-check"></i> 99.9% Uptime</span>
+              </div>
+            </div>
+      <div class="project-actions">
+              <button class="btn btn-outline view-testplan" data-project="lms" aria-controls="modal-lms" aria-expanded="false">View Test Plan</button>
+              <a href="test-plans/lms-test-plan.md" class="btn btn-secondary" download data-test-id="download-lms">Download Test Plan</a>
+            </div>
   </div>
 </div>
       </div>
@@ -1365,7 +1390,7 @@
           </div>
           <div class="cert-content">
             <h3>MasterClass Software Testing with Jira & Agile - Be a QA Lead</h3>
-            <p class="cert-detail">Expired Mar 2025</p>
+            <!-- <p class="cert-detail">Expired Mar 2025</p> -->
             <p class="cert-issuer">Udemy</p>
             <span class="cert-year">Issued Dec 2024</span>
           </div>
@@ -1508,31 +1533,36 @@
 
   <!-- Footer -->
   <footer class="footer">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-brand">
-          <div class="footer-logo"><img src="images/file.jpg" alt="My Photo" class="footer-img"></div>
-          <h3>Md. Sirajus Salekin</h3>
-          <p>SQA Engineer | Quality Engineering Leader</p>
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <img src="images/file.jpg" alt="Md. Sirajus Salekin" class="footer-img">
         </div>
-        <div class="footer-social">
-          <a href="https://github.com/Salekin007" target="_blank" aria-label="GitHub">
-            <i class="fab fa-github"></i>
-          </a>
-          <a href="https://www.linkedin.com/in/salekin007/" target="_blank" aria-label="LinkedIn">
-            <i class="fab fa-linkedin-in"></i>
-          </a>
-          <a href="mailto:salekinsirajus0@gmail.com" aria-label="Email">
-            <i class="fas fa-envelope"></i>
-          </a>
-        </div>
+        <h3>Md. Sirajus Salekin</h3>
+        <p>SQA Engineer | Quality Engineering Leader</p>
       </div>
-      <div class="footer-bottom">
-        <p>© 2026 Md. Sirajus Salekin. All rights reserved.</p>
-        <p>Built with passion for quality excellence</p>
+
+      <div class="footer-social">
+        <a href="https://github.com/Salekin007" target="_blank" aria-label="GitHub">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/salekin007/" target="_blank" aria-label="LinkedIn">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+        <a href="mailto:salekinsirajus0@gmail.com" aria-label="Email">
+          <i class="fas fa-envelope"></i>
+        </a>
       </div>
     </div>
-  </footer>
+
+    <div class="footer-bottom">
+      <p>© 2026 Md. Sirajus Salekin. All rights reserved.</p>
+      <p>Built with passion for quality excellence</p>
+    </div>
+  </div>
+</footer>
+
 
   <!-- Back to Top Button -->
   <button class="back-to-top" id="back-to-top" aria-label="Back to top">
