@@ -1,13 +1,9 @@
 {
-  "name": "salekin-portfolio-tests",
+  "name": "salekin-portfolio",
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "test": "playwright test",
-    "test:headed": "playwright test --headed",
-    "test:report": "playwright show-report"
+    "dev": "npx serve -p 8080"
   },
-  "devDependencies": {
-    "@playwright/test": "^1.38.0"
-  }
+  "devDependencies": {}
 }

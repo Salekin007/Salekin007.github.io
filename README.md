@@ -1,16 +1,38 @@
 # Personal Portfolio Website
 
-## QA Playbook (Lead SQA)
-This site includes a dedicated **QA Hub** with downloadable, professional test plans for featured projects (HIS, LMS, Exam Automation System). Each test plan includes scenarios, test data guidance, acceptance criteria, automation strategy, and artifacts.
+## Portfolio Website for Md. Sirajus Salekin
 
-**CI / Automation**
-- Playwright tests scaffolded in `tests/e2e/` (smoke tests run in CI).
-- GitHub Actions workflow: `.github/workflows/playwright.yml` runs Playwright on push/PR to `main` and uploads the HTML report.
+A modern, responsive portfolio website showcasing my work and skills as a Lead SQA Engineer.
 
-Quick commands (example):
-- Run Playwright smoke: `npm ci && npx playwright test`
-- Show report: `npx playwright show-report`
+## Local Development
 
-See `test-plans/` for full test plan markdown files.
+To run this website locally:
 
-[![Playwright Tests](https://github.com/Salekin007/Salekin007.github.io/actions/workflows/playwright.yml/badge.svg)](https://github.com/Salekin007/Salekin007.github.io/actions/workflows/playwright.yml)
+```bash
+# Using serve (recommended)
+npx serve -p 8080
+```
+
+Then open http://localhost:8080 in your browser.
+
+## React Version
+
+A React version of this portfolio is available in the `react-app/` directory.
+
+### Running the React Version
+
+```bash
+cd react-app
+npm install
+npm run dev
+```
+
+## Contact
+
+- **Email:** salekinsirajus0@gmail.com
+- **LinkedIn:** https://www.linkedin.com/in/salekin007/
+- **GitHub:** https://github.com/Salekin007
+
+## License
+
+© 2026 Md. Sirajus Salekin. All rights reserved.
