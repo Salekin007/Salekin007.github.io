@@ -13,10 +13,20 @@
 }
 
 :root {
-  /* Primary Colors */
-  --primary: #4F46E5;
-  --primary-dark: #4338CA;
-  --primary-light: #6366F1;
+  /* Primary Colors - Airbnb Design System */
+  --rausch-red: #ff385c;
+  --deep-rausch: #e00b41;
+  --error-red: #c13515;
+  --error-dark: #b32505;
+
+  /* Premium Tiers */
+  --luxe-purple: #460479;
+  --plus-magenta: #92174d;
+
+  /* Legacy Mapping */
+  --primary: #ff385c;
+  --primary-dark: #e00b41;
+  --primary-light: #ff6b7a;
 
   /* Accent Colors */
   --accent-purple: #8B5CF6;
@@ -26,26 +36,36 @@
   --accent-green: #10B981;
   --success: #10B981;
 
-  /* Neutrals */
-  --white: #FFFFFF;
-  --gray-50: #F9FAFB;
-  --gray-100: #F3F4F6;
-  --gray-200: #E5E7EB;
-  --gray-300: #D1D5DB;
-  --gray-400: #9CA3AF;
-  --gray-500: #6B7280;
-  --gray-600: #4B5563;
-  --gray-700: #374151;
-  --gray-800: #1F2937;
-  --gray-900: #111827;
+  /* Neutrals - Airbnb Warm Tones */
+  --white: #ffffff;
+  --near-black: #222222;
+  --focused-gray: #3f3f3f;
+  --secondary-gray: #6a6a6a;
+  --disabled: rgba(0, 0, 0, 0.24);
+  --link-disabled: #929292;
+  --legal-blue: #428bff;
+  --border-gray: #c1c1c1;
+  --light-surface: #f2f2f2;
 
-  /* Gradients */
-  --gradient-primary: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
-  --gradient-accent: linear-gradient(135deg, #EC4899 0%, #F97316 100%);
-  --gradient-cool: linear-gradient(135deg, #06B6D4 0%, #3B82F6 100%);
-  --gradient-warm: linear-gradient(135deg, #F59E0B 0%, #EF4444 100%);
-  --gradient-dark: linear-gradient(135deg, #1F2937 0%, #111827 100%);
-  --gradient-hero: linear-gradient(180deg, #EEF2FF 0%, #E0E7FF 50%, #C7D2FE 100%);
+  /* Legacy Gray Mapping - Airbnb Style */
+  --gray-50: #ffffff;
+  --gray-100: #fafafa;
+  --gray-200: #f2f2f2;
+  --gray-300: #eeeeee;
+  --gray-400: #dddddd;
+  --gray-500: #c1c1c1;
+  --gray-600: #929292;
+  --gray-700: #6a6a6a;
+  --gray-800: #3f3f3f;
+  --gray-900: #222222;
+
+  /* Gradients - Airbnb Style */
+  --gradient-primary: #ff385c;
+  --gradient-accent: #ff385c;
+  --gradient-cool: #ff385c;
+  --gradient-warm: #ff385c;
+  --gradient-dark: #222222;
+  --gradient-hero: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
 
   /* Spacing */
   --space-xs: 0.25rem;
@@ -59,25 +79,39 @@
   --space-5xl: 6rem;
   --space-6xl: 8rem;
 
-  /* Border Radius */
-  --radius-xs: 0.25rem;
-  --radius-sm: 0.375rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 0.75rem;
-  --radius-xl: 1rem;
-  --radius-2xl: 1.25rem;
-  --radius-3xl: 1.5rem;
-  --radius-full: 9999px;
+  /* Border Radius - Airbnb Design System */
+  --radius-subtle: 4px;
+  --radius-standard: 8px;
+  --radius-badge: 14px;
+  --radius-card: 20px;
+  --radius-large: 32px;
+  --radius-circle: 50%;
+  /* Legacy mapping */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 8px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-2xl: 32px;
+  --radius-3xl: 32px;
+  --radius-full: 50%;
 
-  /* Shadows */
-  --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-  --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
-  --shadow-glow: 0 0 20px rgba(79, 70, 229, 0.4);
-  --shadow-glow-lg: 0 0 40px rgba(79, 70, 229, 0.6);
+  /* Shadows - Airbnb Three-Layer System */
+  /* Card (Level 1): Border ring + soft blur + stronger blur */
+  --shadow-card: rgba(0, 0, 0, 0.02) 0px 0px 0px 1px, rgba(0, 0, 0, 0.04) 0px 2px 6px, rgba(0, 0, 0, 0.1) 0px 4px 8px;
+  /* Hover (Level 2): Button hover elevation */
+  --shadow-hover: rgba(0, 0, 0, 0.08) 0px 4px 12px;
+  /* Active Focus (Level 3): White ring + focus shadow */
+  --shadow-focus: rgba(255, 255, 255, 0px 0px 0px 4px);
+  /* Legacy mapping */
+  --shadow-xs: rgba(0, 0, 0, 0.02) 0px 0px 0px 1px;
+  --shadow-sm: rgba(0, 0, 0, 0.02) 0px 0px 0px 1px, rgba(0, 0, 0, 0.04) 0px 2px 6px;
+  --shadow-md: rgba(0, 0, 0, 0.02) 0px 0px 0px 1px, rgba(0, 0, 0, 0.04) 0px 2px 6px, rgba(0, 0, 0, 0.1) 0px 4px 8px;
+  --shadow-lg: rgba(0, 0, 0, 0.08) 0px 4px 12px;
+  --shadow-xl: rgba(0, 0, 0, 0.08) 0px 4px 12px;
+  --shadow-2xl: rgba(0, 0, 0, 0.08) 0px 4px 12px;
+  --shadow-glow: 0 0 20px rgba(255, 56, 92, 0.3);
+  --shadow-glow-lg: 0 0 40px rgba(255, 56, 92, 0.5);
 
   /* Transitions */
   --transition-fast: 150ms ease;
@@ -106,8 +140,8 @@ body {
   font-family: var(--font-sans);
   font-size: 16px;
   line-height: 1.6;
-  color: var(--gray-600);
-  background: var(--gray-50);
+  color: var(--near-black);
+  background: var(--white);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -251,15 +285,14 @@ body {
   left: 0;
   right: 0;
   z-index: var(--z-navbar);
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(20px) saturate(180%);
-  border-bottom: 1px solid var(--gray-200);
+  background: var(--white);
+  border-bottom: 1px solid var(--border-gray);
   transition: var(--transition-normal);
 }
 
 .navbar.scrolled {
-  background: rgba(255, 255, 255, 0.95);
-  box-shadow: var(--shadow-md);
+  background: var(--white);
+  box-shadow: var(--shadow-card);
 }
 
 .nav-container {
@@ -278,27 +311,17 @@ body {
   justify-content: center;
   width: 48px;
   height: 48px;
-  background: var(--gradient-primary);
-  border-radius: var(--radius-xl);
+  background: var(--rausch-red);
+  border-radius: var(--radius-card);
   text-decoration: none;
   transition: var(--transition-base);
   position: relative;
   overflow: hidden;
 }
 
-.nav-logo::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 50%);
-}
-
 .nav-logo:hover {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-glow);
+  box-shadow: var(--shadow-hover);
 }
 
 .logo-text {
@@ -333,11 +356,11 @@ body {
   align-items: center;
   gap: var(--space-sm);
   padding: var(--space-sm) var(--space-md);
-  color: var(--gray-600);
+  color: var(--near-black);
   text-decoration: none;
   font-weight: 500;
   font-size: 0.9rem;
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-badge);
   transition: var(--transition-fast);
   white-space: nowrap;
   cursor: pointer;
@@ -350,13 +373,13 @@ body {
 }
 
 .nav-link:hover {
-  color: var(--primary);
-  background: rgba(79, 70, 229, 0.08);
+  color: var(--rausch-red);
+  background: rgba(255, 56, 92, 0.08);
 }
 
 .nav-link.active {
-  color: var(--primary);
-  background: rgba(79, 70, 229, 0.1);
+  color: var(--rausch-red);
+  border-bottom: 2px solid var(--rausch-red);
 }
 
 .nav-actions {
@@ -370,19 +393,20 @@ body {
   align-items: center;
   gap: var(--space-sm);
   padding: var(--space-sm) var(--space-lg);
-  background: var(--gradient-primary);
+  background: var(--rausch-red);
   color: var(--white);
   text-decoration: none;
   font-weight: 600;
   font-size: 0.875rem;
-  border-radius: var(--radius-full);
+  border-radius: var(--radius-standard);
   transition: var(--transition-base);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-hover);
 }
 
 .nav-cta:hover {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-glow);
+  box-shadow: var(--shadow-hover);
+  background: var(--deep-rausch);
 }
 
 .nav-cta i {
@@ -391,6 +415,31 @@ body {
 
 .nav-cta:hover i {
   transform: translateX(3px);
+}
+
+/* Theme Toggle - Airbnb Circular Nav Style */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: var(--light-surface);
+  color: var(--near-black);
+  border: none;
+  border-radius: var(--radius-circle);
+  cursor: pointer;
+  transition: var(--transition-base);
+  font-size: 1rem;
+}
+
+.theme-toggle:hover {
+  background: var(--border-gray);
+  box-shadow: var(--shadow-hover);
+}
+
+.theme-toggle:active {
+  transform: scale(0.92);
 }
 
 .hamburger {
@@ -429,7 +478,7 @@ body {
   top: 80px;
   left: 0;
   height: 3px;
-  background: var(--gradient-primary);
+  background: var(--rausch-red);
   z-index: var(--z-navbar);
   transform-origin: left;
   transform: scaleX(0);
@@ -2964,4 +3013,217 @@ body {
   .metric-value {
     font-size: 1.5rem;
   }
+}
+/* ============================================
+   DARK MODE - Airbnb Design System
+   ============================================ */
+[data-theme="dark"] {
+  /* Dark Mode Colors */
+  --white: #1a1a1a;
+  --near-black: #ffffff;
+  --gray-50: #0a0a0a;
+  --gray-100: #1a1a1a;
+  --gray-200: #2a2a2a;
+  --gray-300: #3a3a3a;
+  --gray-400: #4a4a4a;
+  --gray-500: #6a6a6a;
+  --gray-600: #9a9a9a;
+  --gray-700: #bababa;
+  --gray-800: #dadada;
+  --gray-900: #eeeeee;
+  --secondary-gray: #bababa;
+  --border-gray: #3a3a3a;
+  --light-surface: #2a2a2a;
+}
+
+[data-theme="dark"] body {
+  color: var(--near-black);
+  background: var(--gray-100);
+}
+
+[data-theme="dark"] .navbar {
+  background: var(--gray-100);
+  border-bottom: 1px solid var(--border-gray);
+}
+
+[data-theme="dark"] .navbar.scrolled {
+  background: rgba(26, 26, 26, 0.95);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .nav-link {
+  color: var(--gray-600);
+}
+
+[data-theme="dark"] .nav-link:hover {
+  color: var(--rausch-red);
+  background: rgba(255, 56, 92, 0.1);
+}
+
+[data-theme="dark"] .nav-link.active {
+  color: var(--rausch-red);
+  border-bottom: 2px solid var(--rausch-red);
+}
+
+[data-theme="dark"] .theme-toggle {
+  background: var(--light-surface);
+  color: var(--near-black);
+}
+
+[data-theme="dark"] .theme-toggle:hover {
+  background: var(--gray-400);
+}
+
+[data-theme="dark"] .hamburger span {
+  background: var(--gray-700);
+}
+
+[data-theme="dark"] .mobile-overlay {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+[data-theme="dark"] .hero-gradient {
+  background: linear-gradient(180deg, #1a1a1a 0%, #0a0a0a 100%);
+}
+
+[data-theme="dark"] .hero-grid {
+  background-image:
+    linear-gradient(rgba(255, 56, 92, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 56, 92, 0.05) 1px, transparent 1px);
+}
+
+[data-theme="dark"] .hero-badge {
+  background: rgba(255, 56, 92, 0.15);
+  color: var(--rausch-red);
+  border: 1px solid rgba(255, 56, 92, 0.3);
+}
+
+[data-theme="dark"] .hero-greeting {
+  color: var(--gray-700);
+}
+
+[data-theme="dark"] .hero-name {
+  background: linear-gradient(135deg, #ff385c 0%, #ff6b7a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+[data-theme="dark"] .hero-role {
+  color: #ff6b7a;
+}
+
+[data-theme="dark"] .hero-subtitle {
+  color: var(--gray-700);
+}
+
+[data-theme="dark"] .hero-description {
+  color: var(--gray-600);
+}
+
+[data-theme="dark"] .metric-card {
+  background: var(--gray-200);
+  border: 1px solid var(--gray-300);
+}
+
+[data-theme="dark"] .metric-card:hover {
+  border-color: var(--rausch-red);
+  box-shadow: 0 4px 12px rgba(255, 56, 92, 0.2);
+}
+
+[data-theme="dark"] .metric-value {
+  color: var(--rausch-red);
+}
+
+[data-theme="dark"] .section {
+  background: var(--gray-100);
+}
+
+[data-theme="dark"] .section-title {
+  color: var(--near-black);
+}
+
+[data-theme="dark"] .section-subtitle {
+  color: var(--gray-600);
+}
+
+[data-theme="dark"] .card {
+  background: var(--gray-200);
+  border: 1px solid var(--gray-300);
+}
+
+[data-theme="dark"] .card:hover {
+  background: var(--gray-300);
+  border-color: var(--rausch-red);
+}
+
+[data-theme="dark"] .btn-primary {
+  background: var(--rausch-red);
+  color: var(--white);
+}
+
+[data-theme="dark"] .btn-primary:hover {
+  background: var(--deep-rausch);
+}
+
+[data-theme="dark"] .btn-secondary {
+  background: transparent;
+  color: var(--near-black);
+  border: 1px solid var(--gray-500);
+}
+
+[data-theme="dark"] .btn-secondary:hover {
+  background: var(--gray-300);
+  border-color: var(--near-black);
+}
+
+[data-theme="dark"] .footer {
+  background: var(--gray-100);
+  border-top: 1px solid var(--gray-300);
+}
+
+[data-theme="dark"] .footer-title {
+  color: var(--near-black);
+}
+
+[data-theme="dark"] .footer-link {
+  color: var(--gray-600);
+}
+
+[data-theme="dark"] .footer-link:hover {
+  color: var(--rausch-red);
+}
+
+[data-theme="dark"] .tag {
+  background: var(--gray-300);
+  color: var(--near-black);
+}
+
+[data-theme="dark"] .badge {
+  background: rgba(255, 56, 92, 0.15);
+  color: var(--rausch-red);
+}
+
+[data-theme="dark"] .back-to-top {
+  background: var(--gray-200);
+  color: var(--near-black);
+  border: 1px solid var(--gray-400);
+}
+
+[data-theme="dark"] .back-to-top:hover {
+  background: var(--rausch-red);
+  color: var(--white);
+  border-color: var(--rausch-red);
+}
+
+[data-theme="dark"] .loading-screen {
+  background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+}
+
+[data-theme="dark"] .loading-content {
+  color: var(--near-black);
+}
+
+[data-theme="dark"] .loading-logo {
+  background: var(--rausch-red);
 }
