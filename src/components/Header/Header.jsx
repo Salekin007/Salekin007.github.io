@@ -23,7 +23,7 @@ export default function Header() {
     if (savedTheme) {
       return savedTheme === 'dark';
     }
-    return false;
+    return true;
   });
 
   useEffect(() => {
@@ -83,8 +83,7 @@ export default function Header() {
           offset={-80}
           className="nav-logo"
         >
-          <span className="logo-text">SS</span>
-          <span className="logo-dot"></span>
+          <img src="/profile.jpg" alt="Profile" className="logo-img" />
         </Link>
 
         <ul className={`nav-menu ${isMobileMenuOpen ? 'active' : ''}`} id="nav-menu">
