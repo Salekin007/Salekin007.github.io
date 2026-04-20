@@ -28,9 +28,8 @@ export default function Hero() {
       <div className="hero-content">
         <div className="hero-badge-wrapper">
           <div className="hero-badge">
-            <span className="badge-dot"></span>
-            <span className="badge-text">Available for Lead SQA Opportunities</span>
-            <span className="badge-pulse"></span>
+            <i className="fas fa-briefcase"></i>
+            <span>Available for SQA Opportunities</span>
           </div>
         </div>
 

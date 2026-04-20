@@ -87,8 +87,8 @@ export default function About() {
           <div className="about-sidebar">
             <div className="profile-card">
               <div className="profile-header">
-                <div className="profile-avatar">
-                  <span>SS</span>
+                <div className="profile-avatar profile-avatar-image">
+                  <img src="/assets/profile-picture.jpg" alt="Md. Sirajus Salekin" />
                 </div>
                 <div className="profile-info">
                   <h3>Md. Sirajus Salekin</h3>

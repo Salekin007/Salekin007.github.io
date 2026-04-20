@@ -25,13 +25,12 @@ export default function Footer() {
   const socialLinks = [
     { name: 'GitHub', icon: 'fab fa-github', url: 'https://github.com/Salekin007', color: '#333' },
     { name: 'LinkedIn', icon: 'fab fa-linkedin-in', url: 'https://www.linkedin.com/in/salekin007/', color: '#0077b5' },
-    { name: 'Email', icon: 'fas fa-envelope', url: 'mailto:salekinsirajus0@gmail.com', color: '#ea4335' },
-    { name: 'Twitter', icon: 'fab fa-twitter', url: 'https://twitter.com/salekin007', color: '#1da1f2' },
+    { name: 'Email', icon: 'fas fa-envelope', url: 'mailto:salekinsirajus0@gmail.com', color: '#ea4335' }
   ];
 
   const techStack = [
-    'Selenium', 'Cypress', 'Playwright', 'Jenkins', 'GitHub Actions',
-    'Appium', 'Postman', 'JIRA', 'Python', 'Java'
+    'Playwright', 'Jenkins', 'GitHub Actions',
+    'Appium 2.0', 'Postman', 'JIRA', 'Python', 'TypeScript'
   ];
 
   return (
