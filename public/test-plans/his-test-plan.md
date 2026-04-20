@@ -1,7 +1,7 @@
 # Hospital Information System (HIS) — Test Plan
 
 **Author:** Md. Sirajus Salekin
-**Role:** Lead SQA Engineer
+**Role:** Senior SQA Engineer
 **Date:** 2026-02-01
 
 ---

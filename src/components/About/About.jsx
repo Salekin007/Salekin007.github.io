@@ -47,9 +47,15 @@ export default function About() {
                 <i className="fas fa-quote-left"></i> My Journey
               </h3>
               <p>
-                I'm a <strong>Lead Software Quality Assurance Engineer</strong> with a passion for building world-class quality engineering organizations.
-                With over 4 years of progressive experience from individual contributor to team lead, I specialize in transforming QA practices,
-                building scalable automation frameworks, and fostering a culture of quality across organizations.
+                I'm a <strong>Senior Software Quality Assurance Engineer</strong> with a strong passion for delivering reliable, scalable, and high-performing software products.
+                With over 5 years of progressive experience in quality assurance, I specialize in end-to-end testing strategies, test automation, API validation,
+                performance engineering, and continuous quality improvement across modern web and mobile applications.
+              </p>
+
+              <p>
+                My core expertise includes building robust automation frameworks using <strong>Playwright with TypeScript</strong>, mobile automation using
+                <strong>Appium 2.0</strong>, API testing with <strong>Postman</strong>, and performance testing using <strong>k6</strong>.
+                I focus on reducing release risks, improving test efficiency, and ensuring business-critical systems meet the highest quality standards.
               </p>
               <p>
                 My expertise spans <strong>test strategy design, automation architecture, team leadership, and DevOps integration</strong>.

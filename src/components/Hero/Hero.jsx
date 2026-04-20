@@ -37,19 +37,20 @@ export default function Hero() {
         </div>
 
         <h1 className="hero-title">
-          <span className="hero-greeting">Hi, I'm</span>
+          <span className="hero-greeting"><b color='Red'>As-salamu alaykum</b>, I'm</span>
           <span className="hero-name">Md. Sirajus Salekin</span>
-          <span className="hero-role">Lead SQA Engineer</span>
+          <span className="hero-role">Senior SQA Engineer</span>
         </h1>
 
         <p className="hero-subtitle">
-          Transforming Quality Engineering through Strategic Leadership, Automation Architecture, & Process Excellence
+          Delivering Software Excellence through Automation, Performance Testing, API Quality & Process Improvement
         </p>
 
         <p className="hero-description">
-          Senior Quality Assurance Leader with 4+ years of experience building high-performing QA teams,
-          designing scalable test automation frameworks, and driving quality culture across organizations.
-          Passionate about shift-left testing, CI/CD integration, and delivering exceptional user experiences.
+          Senior Software Quality Assurance Engineer with 5+ years of experience in manual testing, test automation,
+          API validation, and performance engineering. Skilled in building scalable automation frameworks using Playwright
+          with TypeScript, mobile automation with Appium 2.0, API testing with Postman, and load testing using k6.
+          Passionate about shift-left testing, CI/CD quality integration, and delivering reliable user experiences.
         </p>
 
         <div className="hero-metrics">

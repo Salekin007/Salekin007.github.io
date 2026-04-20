@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Md. Sirajus Salekin | Lead SQA Engineer</title>
-    <meta name="description" content="Lead Software Quality Assurance Engineer with expertise in Test Strategy, Automation Architecture, Team Leadership, and Quality Engineering." />
+    <title>Md. Sirajus Salekin | Senior Software Quality Assurance Engineer</title>
+    <meta name="description" content="Senior Software Quality Assurance Engineer with expertise in Test Strategy, Automation Architecture, Team Leadership, and Quality Engineering." />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,6 +14,56 @@
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+    <!-- Inspection Protection -->
+    <script>
+      (function() {
+        'use strict';
+
+        // Disable right-click immediately
+        document.addEventListener('contextmenu', function(e) {
+          e.preventDefault();
+          return false;
+        }, true);
+
+        // Disable keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+          const disabledKeys = [
+            'F12', 'F11', 'F10', 'F9', 'F8', 'F7', 'F6', 'F5', 'F4', 'F3', 'F2', 'F1',
+            'Ctrl+Shift+I', 'Ctrl+Shift+J', 'Ctrl+Shift+C', 'Ctrl+U',
+            'Ctrl+Shift+U', 'Ctrl+S', 'Ctrl+Shift+K', 'Ctrl+Shift+P'
+          ];
+
+          const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+          const ctrlKey = isMac ? e.metaKey : e.ctrlKey;
+
+          const keyCombo = [
+            ctrlKey ? 'Ctrl' : '',
+            e.shiftKey ? 'Shift' : '',
+            e.altKey ? 'Alt' : '',
+            e.key === ' ' ? 'Space' : e.key
+          ].filter(Boolean).join('+');
+
+          if (e.key.startsWith('F') || disabledKeys.includes(keyCombo)) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+          }
+        }, true);
+
+        // Disable text selection
+        document.addEventListener('selectstart', function(e) {
+          e.preventDefault();
+          return false;
+        }, true);
+
+        // Disable drag
+        document.addEventListener('dragstart', function(e) {
+          e.preventDefault();
+          return false;
+        }, true);
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
