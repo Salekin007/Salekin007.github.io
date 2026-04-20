@@ -3,9 +3,9 @@ const items = [
   'API Testing',
   'Performance Testing',
   'CI/CD Pipeline',
-  'Team Leadership',
   'Quality Strategy',
   'Test Architecture',
+  'AI-Assisted Testing',
   'Agile & Scrum',
 ];
 

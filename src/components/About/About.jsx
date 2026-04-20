@@ -22,9 +22,9 @@ const philosophyCards = [
 ];
 
 const strengths = [
-  { name: 'Leadership', percent: 95 },
   { name: 'Test Strategy', percent: 92 },
   { name: 'Automation', percent: 90 },
+  { name: 'API Testing', percent: 88 },
   { name: 'Communication', percent: 93 },
 ];
 
@@ -34,9 +34,9 @@ export default function About() {
       <div className="container">
         <div className="section-header">
           <span className="section-tag">About Me</span>
-          <h2 className="section-title">Quality Engineering Leader</h2>
+          <h2 className="section-title">Senior SQA Engineer</h2>
           <p className="section-subtitle">
-            Driving excellence in software quality through innovation, leadership, and technical expertise
+            Driving excellence in software quality through innovation and technical expertise
           </p>
         </div>
 
@@ -55,16 +55,17 @@ export default function About() {
               <p>
                 My core expertise includes building robust automation frameworks using <strong>Playwright with TypeScript</strong>, mobile automation using
                 <strong>Appium 2.0</strong>, API testing with <strong>Postman</strong>, and performance testing using <strong>k6</strong>.
+                I'm also an expert in <strong>Claude AI integration</strong> for intelligent test generation, code review, and AI-assisted testing strategies.
                 I focus on reducing release risks, improving test efficiency, and ensuring business-critical systems meet the highest quality standards.
               </p>
               <p>
-                My expertise spans <strong>test strategy design, automation architecture, team leadership, and DevOps integration</strong>.
-                I've successfully led QA initiatives for enterprise systems serving millions of users, reducing time-to-market by 40% while
+                My expertise spans <strong>test strategy design, automation architecture, AI-assisted testing, and DevOps integration</strong>.
+                I've successfully contributed to QA initiatives for enterprise systems serving millions of users, reducing time-to-market by 40% while
                 improving product quality by 60% through innovative testing approaches.
               </p>
               <p>
                 I believe in <strong>shift-left testing</strong>, <strong>continuous quality</strong>, and <strong>data-driven decision making</strong>.
-                My approach combines technical excellence with strong leadership skills to mentor teams, drive process improvements,
+                My approach combines technical excellence with strong collaboration skills to work effectively with teams, drive process improvements,
                 and deliver measurable business value.
               </p>
             </div>
@@ -91,32 +92,26 @@ export default function About() {
                 </div>
                 <div className="profile-info">
                   <h3>Md. Sirajus Salekin</h3>
-                  <p>Lead SQA Engineer</p>
+                  <p>Senior SQA Engineer</p>
                 </div>
               </div>
               <div className="profile-stats">
                 <div className="profile-stat">
                   <span className="stat-label">Experience</span>
-                  <span className="stat-value">4+ Years</span>
+                  <span className="stat-value">5+ Years</span>
                 </div>
                 <div className="profile-stat">
                   <span className="stat-label">Projects</span>
                   <span className="stat-value">20+ Delivered</span>
                 </div>
                 <div className="profile-stat">
-                  <span className="stat-label">Team Size</span>
-                  <span className="stat-value">15+ Led</span>
+                  <span className="stat-label">Automation</span>
+                  <span className="stat-value">70% Coverage</span>
                 </div>
               </div>
               <div className="profile-badges">
                 <span className="badge">
-                  <i className="fas fa-certificate"></i> ISTQB
-                </span>
-                <span className="badge">
-                  <i className="fas fa-award"></i> CSM
-                </span>
-                <span className="badge">
-                  <i className="fas fa-graduation-cap"></i> B.Sc.
+                  <i className="fas fa-graduation-cap"></i> B.Sc. in CSE
                 </span>
               </div>
             </div>

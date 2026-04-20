@@ -63,7 +63,7 @@ export default function Contact() {
           <span className="section-tag">Get In Touch</span>
           <h2 className="section-title">Let's Work Together</h2>
           <p className="section-subtitle">
-            Have a project or leadership opportunity? I'd love to hear from you.
+            Have a project or opportunity? I'd love to hear from you.
           </p>
         </div>
 

@@ -10,16 +10,18 @@ const testingSkills = [
 ];
 
 const automationSkills = [
-  { name: 'Python', percent: 90 },
+  { name: 'TypeScript', percent: 90 },
   { name: 'Playwright', percent: 92 },
-  { name: 'JavaScript', percent: 70 },
+  { name: 'JavaScript', percent: 75 },
+  { name: 'Python', percent: 85 },
   { name: 'SQL', percent: 80 },
-  { name: 'Git', percent: 88 },
-  { name: 'CI/CD', percent: 85 },
+  { name: 'CI/CD', percent: 88 },
 ];
 
 const tools = [
-  { icon: 'fab fa-python', name: 'Python', description: 'Playwright Automation' },
+  { icon: 'fab fa-js', name: 'TypeScript', description: 'Playwright Automation' },
+  { icon: 'fas fa-brain', name: 'Claude AI', description: 'AI-Powered Testing' },
+  { icon: 'fab fa-python', name: 'Python', description: 'Scripting & Tools' },
   { icon: 'fas fa-bug', name: 'Postman', description: 'API Testing' },
   { icon: 'fas fa-bolt', name: 'JMeter', description: 'Performance Testing' },
   { icon: 'fas fa-fire', name: 'k6', description: 'Load Testing' },
@@ -29,12 +31,11 @@ const tools = [
   { icon: 'fas fa-database', name: 'MySQL', description: 'Data Validation' },
   { icon: 'fab fa-linux', name: 'Linux', description: 'Command Line' },
   { icon: 'fab fa-docker', name: 'Docker', description: 'Container Testing' },
-  { icon: 'fas fa-cloud', name: 'AWS', description: 'Cloud Testing' },
-  { icon: 'fas fa-code', name: 'VS Code', description: 'IDE' },
 ];
 
 const methodologies = [
   'Agile / Scrum',
+  'AI-Assisted Testing',
   'Shift-Left Testing',
   'Risk-Based Testing',
   'Exploratory Testing',
@@ -63,7 +64,7 @@ export default function Skills() {
           <span className="section-tag">Technical Skills</span>
           <h2 className="section-title">Skills & Technologies</h2>
           <p className="section-subtitle">
-            Comprehensive technical expertise across the quality engineering stack
+            Comprehensive technical expertise across the quality engineering stack, including AI-assisted testing
           </p>
         </div>
 
@@ -127,7 +128,7 @@ export default function Skills() {
               <div className="tab-content active" id="tools">
                 <div className="tools-grid">
                   {tools.map((tool, index) => (
-                    <div key={index} className="tool-card">
+                    <div key={index} className={`tool-card ${tool.name === 'Claude AI' ? 'claude-card' : ''}`}>
                       <div className="tool-icon">
                         <i className={tool.icon}></i>
                       </div>
@@ -143,8 +144,8 @@ export default function Skills() {
               <div className="tab-content active" id="methodologies">
                 <div className="methodologies-grid">
                   {methodologies.map((method, index) => (
-                    <div key={index} className="methodology-card">
-                      <i className="fas fa-check-circle"></i>
+                    <div key={index} className={`methodology-card ${method.includes('AI') ? 'ai-methodology' : ''}`}>
+                      <i className={`fas ${method.includes('AI') ? 'fa-brain' : 'fa-check-circle'}`}></i>
                       <span>{method}</span>
                     </div>
                   ))}

@@ -5,10 +5,10 @@ const navItems = [
   { id: 'home', icon: 'fa-home', label: 'Home' },
   { id: 'about', icon: 'fa-user', label: 'About' },
   { id: 'expertise', icon: 'fa-star', label: 'Expertise' },
-  { id: 'leadership', icon: 'fa-users-cog', label: 'Leadership' },
   { id: 'skills', icon: 'fa-cogs', label: 'Skills' },
   { id: 'experience', icon: 'fa-briefcase', label: 'Experience' },
   { id: 'qa', icon: 'fa-vial', label: 'QA' },
+  { id: 'certifications', icon: 'fa-certificate', label: 'Certifications' },
   { id: 'projects', icon: 'fa-rocket', label: 'Projects' },
   { id: 'contact', icon: 'fa-paper-plane', label: 'Contact' },
 ];

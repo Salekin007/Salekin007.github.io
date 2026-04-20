@@ -1,17 +1,15 @@
 import { Link } from 'react-scroll';
 
 const metrics = [
-  { icon: 'fa-users', value: '15+', label: 'Team Members Led' },
   { icon: 'fa-chart-line', value: '70%', label: 'Automation Coverage' },
   { icon: 'fa-project-diagram', value: '20+', label: 'Enterprise Projects' },
-  { icon: 'fa-bug', value: '5000+', label: 'Defects Prevented' },
+  { icon: 'fa-bug', value: '5000+', label: 'Bugs Found' },
+  { icon: 'fa-robot', value: 'AI', label: 'Claude Expert' },
 ];
 
 const badges = [
-  { src: 'https://img.shields.io/badge/ISTQB-Certified%20Tester-success?style=flat-square', alt: 'ISTQB Certified' },
-  { src: 'https://img.shields.io/badge/Agile-CSM%20Certified-blue?style=flat-square', alt: 'Agile CSM' },
-  { src: 'https://img.shields.io/badge/Python-Playwright%20Expert-yellow?style=flat-square', alt: 'Python Expert' },
-  { src: 'https://github.com/Salekin007/Salekin007.github.io/actions/workflows/playwright.yml/badge.svg', alt: 'Playwright CI', isCI: true },
+  { src: 'https://img.shields.io/badge/TypeScript-Playwright%20Expert-blue?style=flat-square', alt: 'TS Playwright Expert' },
+  { src: 'https://img.shields.io/badge/Claude-AI%20Expert-purple?style=flat-square&logo=anthropic', alt: 'Claude AI Expert' },
 ];
 
 export default function Hero() {
@@ -50,6 +48,7 @@ export default function Hero() {
           Senior Software Quality Assurance Engineer with 5+ years of experience in manual testing, test automation,
           API validation, and performance engineering. Skilled in building scalable automation frameworks using Playwright
           with TypeScript, mobile automation with Appium 2.0, API testing with Postman, and load testing using k6.
+          Expert in Claude AI integration for test generation, code review, and intelligent automation strategies.
           Passionate about shift-left testing, CI/CD quality integration, and delivering reliable user experiences.
         </p>
 
@@ -99,16 +98,16 @@ export default function Hero() {
       </div>
 
       <div className="floating-card card-1">
+        <i className="fas fa-brain"></i>
+        <span>AI Powered</span>
+      </div>
+      <div className="floating-card card-2">
         <i className="fas fa-robot"></i>
         <span>Automation</span>
       </div>
-      <div className="floating-card card-2">
+      <div className="floating-card card-3">
         <i className="fas fa-shield-alt"></i>
         <span>Quality</span>
-      </div>
-      <div className="floating-card card-3">
-        <i className="fas fa-code-branch"></i>
-        <span>CI/CD</span>
       </div>
     </section>
   );

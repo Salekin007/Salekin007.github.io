@@ -1505,147 +1505,6 @@ body {
 }
 
 /* ============================================
-   LEADERSHIP SECTION
-   ============================================ */
-.leadership-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-2xl);
-  margin-bottom: var(--space-3xl);
-}
-
-.impact-card {
-  background: var(--white);
-  border-radius: var(--radius-2xl);
-  padding: var(--space-2xl);
-  border: 1px solid var(--gray-200);
-  box-shadow: var(--shadow-lg);
-  transition: var(--transition-base);
-}
-
-.impact-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-xl);
-}
-
-.impact-icon {
-  width: 60px;
-  height: 60px;
-  background: var(--gradient-primary);
-  border-radius: var(--radius-2xl);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--white);
-  font-size: 1.5rem;
-  margin-bottom: var(--space-lg);
-}
-
-.impact-content h3 {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--gray-900);
-  margin-bottom: var(--space-md);
-}
-
-.impact-content p {
-  color: var(--gray-600);
-  line-height: 1.6;
-}
-
-.impact-metrics {
-  display: flex;
-  gap: var(--space-xl);
-  margin-top: var(--space-lg);
-}
-
-.impact-metric {
-  text-align: center;
-}
-
-.impact-metric .metric {
-  display: block;
-  font-size: 1.75rem;
-  font-weight: 800;
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  line-height: 1;
-}
-
-.impact-metric span:last-child {
-  font-size: 0.8rem;
-  color: var(--gray-500);
-  display: block;
-}
-
-/* Achievements */
-.achievements-section {
-  margin-top: var(--space-3xl);
-}
-
-.achievements-section h3 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--gray-900);
-  margin-bottom: var(--space-xl);
-}
-
-.achievements-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-lg);
-}
-
-.achievement-item {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--space-md);
-  padding: var(--space-xl);
-  background: var(--white);
-  border-radius: var(--radius-xl);
-  border: 1px solid var(--gray-200);
-  box-shadow: var(--shadow-sm);
-}
-
-.achievement-icon {
-  flex-shrink: 0;
-  width: 50px;
-  height: 50px;
-  border-radius: var(--radius-full);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--white);
-  font-size: 1.25rem;
-}
-
-.achievement-icon.gold {
-  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
-}
-
-.achievement-icon.silver {
-  background: linear-gradient(135deg, #C0C0C0 0%, #808080 100%);
-}
-
-.achievement-icon.bronze {
-  background: linear-gradient(135deg, #CD7F32 0%, #8B4513 100%);
-}
-
-.achievement-text h4 {
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--gray-900);
-  margin-bottom: var(--space-xs);
-}
-
-.achievement-text p {
-  font-size: 0.875rem;
-  color: var(--gray-500);
-}
-
-/* ============================================
    SKILLS SECTION
    ============================================ */
 .skills-tabs {
@@ -1788,6 +1647,48 @@ body {
   color: var(--gray-500);
 }
 
+.tool-card.claude-card {
+  background: linear-gradient(135deg, rgba(123, 66, 188, 0.1) 0%, rgba(155, 92, 214, 0.05) 100%);
+  border: 1px solid rgba(123, 66, 188, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.tool-card.claude-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(123, 66, 188, 0.1) 0%, transparent 70%);
+  animation: rotate 10s linear infinite;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.tool-card.claude-card .tool-icon {
+  background: linear-gradient(135deg, #7b42bc 0%, #9b5cd6 100%);
+  box-shadow: 0 4px 12px rgba(123, 66, 188, 0.3);
+  position: relative;
+  z-index: 1;
+}
+
+.tool-card.claude-card h4 {
+  color: var(--primary);
+  position: relative;
+  z-index: 1;
+}
+
+.tool-card.claude-card:hover {
+  background: linear-gradient(135deg, rgba(123, 66, 188, 0.15) 0%, rgba(155, 92, 214, 0.1) 100%);
+  border-color: var(--primary);
+  box-shadow: 0 8px 24px rgba(123, 66, 188, 0.25);
+}
+
 /* Methodologies Grid */
 .methodologies-grid {
   display: grid;
@@ -1816,6 +1717,76 @@ body {
 
 .methodology-card i {
   color: var(--success);
+}
+
+.methodology-card.ai-methodology {
+  background: linear-gradient(135deg, rgba(123, 66, 188, 0.1) 0%, rgba(155, 92, 214, 0.05) 100%);
+  border-color: rgba(123, 66, 188, 0.2);
+  font-weight: 600;
+}
+
+.methodology-card.ai-methodology i {
+  color: var(--primary);
+}
+
+.methodology-card.ai-methodology:hover {
+  background: linear-gradient(135deg, rgba(123, 66, 188, 0.15) 0%, rgba(155, 92, 214, 0.1) 100%);
+  border-color: var(--primary);
+  box-shadow: 0 4px 12px rgba(123, 66, 188, 0.2);
+}
+
+/* ============================================
+   SKILLS DARK MODE
+   ============================================ */
+[data-theme="dark"] .tool-card {
+  background: var(--surface-interactive);
+  border-color: var(--border-dark);
+}
+
+[data-theme="dark"] .tool-card:hover {
+  background: var(--surface-interactive-dark);
+}
+
+[data-theme="dark"] .tool-card h4 {
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .tool-card p {
+  color: var(--text-secondary);
+}
+
+[data-theme="dark"] .tool-card.claude-card {
+  background: linear-gradient(135deg, rgba(123, 66, 188, 0.2) 0%, rgba(155, 92, 214, 0.1) 100%);
+  border-color: rgba(123, 66, 188, 0.3);
+}
+
+[data-theme="dark"] .tool-card.claude-card:hover {
+  background: linear-gradient(135deg, rgba(123, 66, 188, 0.3) 0%, rgba(155, 92, 214, 0.15) 100%);
+  border-color: var(--primary);
+  box-shadow: 0 8px 24px rgba(123, 66, 188, 0.3);
+}
+
+[data-theme="dark"] .methodology-card {
+  background: var(--surface-interactive);
+  border-color: var(--border-dark);
+  color: var(--text-secondary);
+}
+
+[data-theme="dark"] .methodology-card:hover {
+  background: var(--surface-interactive-dark);
+  border-color: var(--primary);
+}
+
+[data-theme="dark"] .methodology-card.ai-methodology {
+  background: linear-gradient(135deg, rgba(123, 66, 188, 0.2) 0%, rgba(155, 92, 214, 0.1) 100%);
+  border-color: rgba(123, 66, 188, 0.3);
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .methodology-card.ai-methodology:hover {
+  background: linear-gradient(135deg, rgba(123, 66, 188, 0.3) 0%, rgba(155, 92, 214, 0.15) 100%);
+  border-color: var(--primary);
+  box-shadow: 0 4px 12px rgba(123, 66, 188, 0.25);
 }
 
 /* ============================================
@@ -2611,7 +2582,7 @@ body {
   font-size: 0.75rem;
   color: var(--primary);
 }
-}
+
 
 .cert-year {
   display: inline-flex;
@@ -3504,10 +3475,6 @@ body {
   }
 
   .philosophy-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .leadership-grid {
     grid-template-columns: 1fr;
   }
 

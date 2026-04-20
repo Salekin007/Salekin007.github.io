@@ -17,18 +17,6 @@ const expertiseAreas = [
     ],
   },
   {
-    icon: 'fa-users-cog',
-    title: 'Team Leadership',
-    description: 'Building and mentoring high-performing QA teams, fostering collaboration, and driving continuous improvement in quality practices.',
-    items: [
-      'Team Building & Hiring',
-      'Mentoring & Training',
-      'Performance Management',
-      'Resource Planning',
-      'Stakeholder Management',
-    ],
-  },
-  {
     icon: 'fa-code-branch',
     title: 'CI/CD & DevOps',
     description: 'Integrating testing into CI/CD pipelines, implementing continuous quality gates, and enabling faster, more reliable deployments.',
@@ -43,13 +31,25 @@ const expertiseAreas = [
   {
     icon: 'fa-vial',
     title: 'Test Automation',
-    description: 'Building robust automation frameworks using Playwright, Python, and industry best practices for maintainable, scalable test suites.',
+    description: 'Building robust automation frameworks using Playwright, TypeScript, and industry best practices for maintainable, scalable test suites.',
     items: [
       'Framework Architecture',
-      'Playwright & Python',
+      'Playwright & TypeScript',
       'API Automation',
       'Mobile Testing',
       'Page Object Model',
+    ],
+  },
+  {
+    icon: 'fa-brain',
+    title: 'AI-Assisted Testing',
+    description: 'Leveraging Claude AI for intelligent test generation, code review, test case optimization, and automated bug detection.',
+    items: [
+      'AI Test Generation',
+      'Code Review with Claude',
+      'Test Case Optimization',
+      'Automated Bug Detection',
+      'Smart Test Selection',
     ],
   },
   {

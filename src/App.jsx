@@ -5,7 +5,6 @@ import Hero from './components/Hero/Hero';
 import Marquee from './components/Marquee/Marquee';
 import About from './components/About/About';
 import Expertise from './components/Expertise/Expertise';
-import Leadership from './components/Leadership/Leadership';
 import Skills from './components/Skills/Skills';
 import Experience from './components/Experience/Experience';
 import Projects from './components/Projects/Projects';
@@ -64,7 +63,6 @@ function App() {
         <Marquee />
         <About />
         <Expertise />
-        <Leadership />
         <Skills />
         <Experience />
         <Projects onViewTestPlan={handleViewTestPlan} />
