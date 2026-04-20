@@ -62,11 +62,22 @@ function App() {
         <Hero />
         <Marquee />
         <About />
-        <Expertise />
+
+        {/* Three-column layout for Expertise, Projects, and QA */}
+        <div className="three-column-sections">
+          <div className="column-wrapper">
+            <Expertise />
+          </div>
+          <div className="column-wrapper">
+            <Projects onViewTestPlan={handleViewTestPlan} />
+          </div>
+          <div className="column-wrapper">
+            <QA onViewTestPlan={handleViewTestPlan} />
+          </div>
+        </div>
+
         <Skills />
         <Experience />
-        <Projects onViewTestPlan={handleViewTestPlan} />
-        <QA onViewTestPlan={handleViewTestPlan} />
         <Modals activeModal={activeModal} onClose={handleCloseModal} />
         <Certifications />
         <Contact />
