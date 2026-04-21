@@ -4374,7 +4374,7 @@ body {
     width: 95%;
     padding: var(--space-md);
   }
-}
+
 
 @media (max-width: 480px) {
   .section {
