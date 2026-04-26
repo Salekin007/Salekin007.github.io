@@ -1,22 +1,24 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-scroll';
+import { Link, useLocation } from 'react-router-dom';
 
 const navItems = [
   { id: 'home', icon: 'fa-home', label: 'Home' },
   { id: 'about', icon: 'fa-user', label: 'About' },
+  { id: 'impact', icon: 'fa-chart-line', label: 'Impact' },
   { id: 'expertise', icon: 'fa-star', label: 'Expertise' },
   { id: 'skills', icon: 'fa-cogs', label: 'Skills' },
   { id: 'experience', icon: 'fa-briefcase', label: 'Experience' },
   { id: 'qa', icon: 'fa-vial', label: 'QA' },
-  { id: 'certifications', icon: 'fa-certificate', label: 'Certifications' },
   { id: 'projects', icon: 'fa-rocket', label: 'Projects' },
+  { id: 'live-proof', icon: 'fa-chart-bar', label: 'Live Proof' },
+  { id: 'certifications', icon: 'fa-certificate', label: 'Certifications' },
   { id: 'contact', icon: 'fa-paper-plane', label: 'Contact' },
 ];
 
 export default function Header() {
+  const location = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('home');
   const [isDarkMode, setIsDarkMode] = useState(() => {
     // Check for saved theme preference or default to light
     const savedTheme = localStorage.getItem('theme');
@@ -40,61 +42,87 @@ export default function Header() {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.pageYOffset > 50);
+    };
 
-      // Update active section based on scroll position
-      const sections = document.querySelectorAll('.section, .hero');
-      const scrollPosition = window.pageYOffset + 150;
+    const handleResize = () => {
+      // Close mobile menu when resizing to desktop
+      if (window.innerWidth >= 1024 && isMobileMenuOpen) {
+        closeMobileMenu();
+      }
+    };
 
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-
-        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-          setActiveSection(section.getAttribute('id'));
-        }
-      });
+    const handleKeyDown = (e) => {
+      // Close mobile menu on ESC key
+      if (e.key === 'Escape' && isMobileMenuOpen) {
+        closeMobileMenu();
+      }
     };
 
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    window.addEventListener('resize', handleResize);
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isMobileMenuOpen]);
 
   const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-    document.body.style.overflow = !isMobileMenuOpen ? 'hidden' : '';
+    const newState = !isMobileMenuOpen;
+    setIsMobileMenuOpen(newState);
+    document.body.style.overflow = newState ? 'hidden' : '';
+
+    // Toggle hamburger active class
+    const hamburger = document.querySelector('.hamburger');
+    if (hamburger) {
+      if (newState) {
+        hamburger.classList.add('active');
+      } else {
+        hamburger.classList.remove('active');
+      }
+    }
   };
 
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
     document.body.style.overflow = '';
+
+    // Remove hamburger active class
+    const hamburger = document.querySelector('.hamburger');
+    if (hamburger) {
+      hamburger.classList.remove('active');
+    }
   };
 
   const toggleTheme = () => {
     setIsDarkMode(!isDarkMode);
   };
 
+  // Get the current route path
+  const getPath = (id) => {
+    return id === 'home' ? '/' : `/${id}`;
+  };
+
+  // Check if the current route is active
+  const isActive = (id) => {
+    const path = getPath(id);
+    return location.pathname === path;
+  };
+
   return (
     <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`} id="navbar">
       <div className="nav-container">
-        <Link
-          to="home"
-          smooth={true}
-          duration={500}
-          offset={-80}
-          className="nav-logo"
-        >
+        <Link to="/" className="nav-logo">
           <img src="/profile.jpg" alt="Profile" className="logo-img" />
         </Link>
 
         <ul className={`nav-menu ${isMobileMenuOpen ? 'active' : ''}`} id="nav-menu">
           {navItems.map(item => (
-            <li key={item.id}>
+            <li key={item.id} data-nav={item.id}>
               <Link
-                to={item.id}
-                smooth={true}
-                duration={500}
-                offset={-80}
-                className={`nav-link ${activeSection === item.id ? 'active' : ''}`}
+                to={getPath(item.id)}
+                className={`nav-link ${isActive(item.id) ? 'active' : ''}`}
                 onClick={closeMobileMenu}
               >
                 <i className={`fas ${item.icon}`}></i> {item.label}
@@ -112,13 +140,7 @@ export default function Header() {
           >
             <i className={`fas ${isDarkMode ? 'fa-sun' : 'fa-moon'}`}></i>
           </button>
-          <Link
-            to="contact"
-            smooth={true}
-            duration={500}
-            offset={-80}
-            className="nav-cta"
-          >
+          <Link to="/contact" className="nav-cta">
             <span>Let's Talk</span>
             <i className="fas fa-arrow-right"></i>
           </Link>

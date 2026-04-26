@@ -1,48 +1,22 @@
-import { useState, useEffect } from 'react';
-import Header from './components/Header/Header';
-import Loading from './components/Loading/Loading';
-import Hero from './components/Hero/Hero';
-import Marquee from './components/Marquee/Marquee';
-import About from './components/About/About';
-import Expertise from './components/Expertise/Expertise';
-import Skills from './components/Skills/Skills';
-import Experience from './components/Experience/Experience';
-import Projects from './components/Projects/Projects';
-import QA from './components/QA/QA';
+import { useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import Layout from './components/Layout/Layout';
 import Modals from './components/Modals/Modals';
-import Certifications from './components/Certifications/Certifications';
-import Contact from './components/Contact/Contact';
-import Footer from './components/Footer/Footer';
-import {
-  useScrollAnimations,
-  useSkillBarAnimations,
-  useParallaxEffect,
-  useProjectCardTilt,
-} from './hooks/useScrollAnimations';
+import Home from './pages/Home/Home';
+import About from './pages/About/About';
+import Impact from './pages/Impact/Impact';
+import Expertise from './pages/Expertise/Expertise';
+import Projects from './pages/Projects/Projects';
+import QA from './pages/QA/QA';
+import Skills from './pages/Skills/Skills';
+import Experience from './pages/Experience/Experience';
+import LiveProof from './pages/LiveProof/LiveProof';
+import Certifications from './pages/Certifications/Certifications';
+import Contact from './pages/Contact/Contact';
 import './assets/styles/style.css';
 
 function App() {
   const [activeModal, setActiveModal] = useState(null);
-  const [showBackToTop, setShowBackToTop] = useState(false);
-
-  // Initialize scroll animations
-  useScrollAnimations();
-  useSkillBarAnimations();
-  useParallaxEffect();
-  useProjectCardTilt();
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setShowBackToTop(window.pageYOffset > 500);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
 
   const handleViewTestPlan = (projectId) => {
     setActiveModal(projectId);
@@ -53,44 +27,23 @@ function App() {
   };
 
   return (
-    <>
-      <Loading />
-      <Header />
-      <div className="scroll-progress" id="scroll-progress"></div>
-
-      <main>
-        <Hero />
-        <Marquee />
-        <About />
-
-        {/* Three-column layout for Expertise, Projects, and QA */}
-        <div className="three-column-sections">
-          <div className="column-wrapper">
-            <Expertise />
-          </div>
-          <div className="column-wrapper">
-            <Projects onViewTestPlan={handleViewTestPlan} />
-          </div>
-          <div className="column-wrapper">
-            <QA onViewTestPlan={handleViewTestPlan} />
-          </div>
-        </div>
-
-        <Skills />
-        <Experience />
-        <Modals activeModal={activeModal} onClose={handleCloseModal} />
-        <Certifications />
-        <Contact />
-      </main>
-
-      <Footer />
-
-      {showBackToTop && (
-        <button className="back-to-top visible" onClick={scrollToTop} aria-label="Back to top">
-          <i className="fas fa-arrow-up"></i>
-        </button>
-      )}
-    </>
+    <Layout>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/impact" element={<Impact />} />
+        <Route path="/expertise" element={<Expertise />} />
+        <Route path="/projects" element={<Projects onViewTestPlan={handleViewTestPlan} />} />
+        <Route path="/qa" element={<QA onViewTestPlan={handleViewTestPlan} />} />
+        <Route path="/skills" element={<Skills />} />
+        <Route path="/experience" element={<Experience />} />
+        <Route path="/live-proof" element={<LiveProof />} />
+        <Route path="/certifications" element={<Certifications />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+      <Modals activeModal={activeModal} onClose={handleCloseModal} />
+    </Layout>
   );
 }
 

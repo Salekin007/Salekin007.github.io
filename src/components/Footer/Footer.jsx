@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
@@ -67,10 +69,10 @@ export default function Footer() {
             <ul className="footer-links">
               {quickLinks.map((link) => (
                 <li key={link.id}>
-                  <a href={`#${link.id}`} className="footer-link">
+                  <Link to={link.id === 'home' ? '/' : `/${link.id}`} className="footer-link">
                     <i className={`fas ${link.icon}`}></i>
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -137,7 +139,15 @@ export default function Footer() {
               <p className="footer-tagline-small">Built with passion for quality excellence 🚀</p>
             </div>
             <div className="footer-bottom-links">
-              <a href="#home">Back to Top <i className="fas fa-arrow-up"></i></a>
+              {/* Visitor Count */}
+              <div className="visitor-count">
+                <img
+                  src="https://visitor-badge.laobi.icu/badge?page_id=Salekin007.github.io&left_color=gray&right_color=blue"
+                  alt="Visitor Count"
+                  title="Visitor Count"
+                />
+              </div>
+              <Link to="/">Back to Top <i className="fas fa-arrow-up"></i></Link>
             </div>
           </div>
         </div>

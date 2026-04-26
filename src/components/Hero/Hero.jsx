@@ -1,10 +1,10 @@
 import { Link } from 'react-scroll';
 
 const metrics = [
-  { icon: 'fa-chart-line', value: '70%', label: 'Automation Coverage' },
-  { icon: 'fa-project-diagram', value: '20+', label: 'Enterprise Projects' },
-  { icon: 'fa-bug', value: '5000+', label: 'Bugs Found' },
-  { icon: 'fa-robot', value: 'AI', label: 'Claude Expert' },
+  { icon: 'fa-bolt', value: '60%', label: 'Regression Time Reduced' },
+  { icon: 'fa-chart-line', value: '1000+', label: 'Users Load Tested' },
+  { icon: 'fa-bug', value: '1000+', label: 'Critical Bugs Prevented' },
+  { icon: 'fa-rocket', value: '99.9%', label: 'Production Uptime' },
 ];
 
 const badges = [
@@ -36,19 +36,18 @@ export default function Hero() {
         <h1 className="hero-title">
           <span className="hero-greeting"><b color='Red'>As-salamu alaykum</b>, I'm</span>
           <span className="hero-name">Md. Sirajus Salekin</span>
-          <span className="hero-role">Senior SQA Engineer</span>
+          <span className="hero-role">Automation Architect | Quality Engineering Lead</span>
         </h1>
 
         <p className="hero-subtitle">
-          Delivering Software Excellence through Automation, Performance Testing, API Quality & Process Improvement
+          Reduced Regression Time by 60% | Scaled Systems for Millions of Users | Zero Critical Releases
         </p>
 
         <p className="hero-description">
-          Senior Software Quality Assurance Engineer with 5+ years of experience in manual testing, test automation,
-          API validation, and performance engineering. Skilled in building scalable automation frameworks using Playwright
-          with TypeScript, mobile automation with Appium 2.0, API testing with Postman, and load testing using k6.
-          Expert in Claude AI integration for test generation, code review, and intelligent automation strategies.
-          Passionate about shift-left testing, CI/CD quality integration, and delivering reliable user experiences.
+          Automation Architect specializing in building scalable test frameworks, implementing CI/CD quality gates,
+          and leading QA teams to deliver production-ready software. Expert in Playwright, k6 performance testing,
+          and AI-assisted test generation. Proven track record of reducing release cycles from 2 weeks to 3 days
+          while maintaining 99.9% uptime across enterprise platforms serving 50,000+ daily users.
         </p>
 
         <div className="hero-metrics">
