@@ -12,6 +12,7 @@ const navItems = [
   { id: 'projects', icon: 'fa-rocket', label: 'Projects' },
   { id: 'live-proof', icon: 'fa-chart-bar', label: 'Live Proof' },
   { id: 'certifications', icon: 'fa-certificate', label: 'Certifications' },
+  { id: 'interview-prep', icon: 'fa-graduation-cap', label: 'Interview Prep' },
   { id: 'contact', icon: 'fa-paper-plane', label: 'Contact' },
 ];
 

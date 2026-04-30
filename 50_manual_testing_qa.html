@@ -1,0 +1,415 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font-sans);}
+.wrap{padding:1rem 0;}
+.top-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:8px;}
+.stats{display:flex;gap:8px;}
+.stat{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:6px 12px;font-size:12px;color:var(--color-text-secondary);}
+.stat b{color:var(--color-text-primary);}
+.filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1rem;}
+.ftab{padding:6px 12px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);font-size:12px;cursor:pointer;background:var(--color-background-primary);color:var(--color-text-secondary);}
+.ftab.on{background:#1F3864;color:#fff;border-color:#1F3864;font-weight:500;}
+.search-box{width:100%;padding:8px 12px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);color:var(--color-text-primary);font-size:13px;margin-bottom:1rem;outline:none;}
+.search-box:focus{border-color:#1F3864;}
+.qcard{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);margin-bottom:8px;overflow:hidden;}
+.qhead{display:flex;align-items:flex-start;gap:10px;cursor:pointer;padding:12px 14px;}
+.qhead:hover{background:var(--color-background-secondary);}
+.qnum{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;flex-shrink:0;margin-top:1px;}
+.qnum-b{background:#E6F1FB;color:#0C447C;}
+.qnum-m{background:#FAEEDA;color:#633806;}
+.qnum-a{background:#FCEBEB;color:#791F1F;}
+.qnum-s{background:#EEEDFE;color:#3C3489;}
+.qtext{font-size:13px;font-weight:500;color:var(--color-text-primary);line-height:1.5;flex:1;}
+.qarr{font-size:11px;color:var(--color-text-tertiary);transition:transform 0.2s;flex-shrink:0;margin-top:4px;}
+.qcard.open .qarr{transform:rotate(180deg);}
+.abody{display:none;padding:0 14px 12px 52px;}
+.abody.show{display:block;}
+.atags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px;}
+.tag{display:inline-block;font-size:11px;padding:2px 7px;border-radius:99px;font-weight:500;}
+.tb{background:#E6F1FB;color:#0C447C;}
+.tg{background:#EAF3DE;color:#27500A;}
+.ta{background:#FAEEDA;color:#633806;}
+.tr{background:#FCEBEB;color:#791F1F;}
+.tp{background:#EEEDFE;color:#3C3489;}
+.tt{background:#E1F5EE;color:#085041;}
+.ans{font-size:13px;color:var(--color-text-secondary);line-height:1.7;}
+.ans b{color:var(--color-text-primary);font-weight:500;}
+.proj-box{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:9px 12px;margin-top:8px;font-size:12px;color:var(--color-text-secondary);line-height:1.6;border-left:3px solid #1F3864;}
+.proj-label{font-size:11px;font-weight:500;color:#1F3864;margin-bottom:3px;}
+.warn{background:#FAEEDA;border-radius:var(--border-radius-md);padding:7px 10px;font-size:12px;color:#633806;margin-top:6px;}
+.good{background:#EAF3DE;border-radius:var(--border-radius-md);padding:7px 10px;font-size:12px;color:#27500A;margin-top:6px;}
+.done-btn{font-size:11px;padding:4px 10px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);background:transparent;color:var(--color-text-secondary);cursor:pointer;margin-top:8px;}
+.done-btn.marked{background:#EAF3DE;color:#27500A;border-color:#27500A;}
+.cat-label{font-size:11px;font-weight:500;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:0.05em;margin:1rem 0 6px;padding-left:2px;}
+.no-results{text-align:center;padding:2rem;color:var(--color-text-tertiary);font-size:13px;}
+.progress-wrap{margin-bottom:1rem;}
+.progress-bar{height:5px;background:var(--color-background-secondary);border-radius:99px;overflow:hidden;}
+.progress-fill{height:100%;background:#1F3864;border-radius:99px;transition:width 0.3s;}
+.progress-text{font-size:11px;color:var(--color-text-tertiary);margin-top:3px;text-align:right;}
+</style>
+<div class="wrap">
+<h2 style="font-size:17px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px;">50 Manual Testing Q&A</h2>
+<p style="font-size:12px;color:var(--color-text-secondary);margin-bottom:1rem;">Based on your CV — IEIMS, HIMS & LMS projects. Click any question to reveal the full answer.</p>
+
+<div class="progress-wrap">
+<div class="progress-bar"><div class="progress-fill" id="prog-fill" style="width:0%"></div></div>
+<div class="progress-text" id="prog-text">0 / 50 answered</div>
+</div>
+
+<input class="search-box" placeholder="Search questions..." oninput="doSearch(this.value)" />
+
+<div class="filters">
+<button class="ftab on" onclick="filter('all',this)">All (50)</button>
+<button class="ftab" onclick="filter('basic',this)">Basic (15)</button>
+<button class="ftab" onclick="filter('intermediate',this)">Intermediate (20)</button>
+<button class="ftab" onclick="filter('advanced',this)">Advanced (15)</button>
+<button class="ftab" onclick="filter('marked',this)">Reviewed ✓</button>
+</div>
+
+<div id="q-container"></div>
+</div>
+
+<script>
+var marked = new Set();
+var currentFilter = 'all';
+var currentSearch = '';
+
+var questions = [
+// BASIC (1-15)
+{id:1,level:'basic',cat:'Fundamentals',q:'What is manual testing and why is it still important even when you have automation?',
+tags:['tb','tg'],tagNames:['Fundamentals','Senior mindset'],
+ans:'Manual testing is the process of evaluating software by a human tester without using automation tools. It remains critical because <b>automation cannot replace human judgment</b>. Machines verify what you tell them to verify — they cannot intuitively notice that a UI looks wrong, a user journey feels confusing, or that a business rule is being followed technically but makes no practical sense. At senior level, I use manual testing for <b>exploratory testing, UAT, usability assessment, and any scenario requiring human interpretation of "correct."</b>',
+proj:'On IEIMS, automated tests verified that the student search returned results. Manual exploratory testing found that search results were displayed in a confusing order — alphabetical by first name instead of by registration number. The system was technically correct but practically unusable. No automated test would have flagged that.'},
+
+{id:2,level:'basic',cat:'Fundamentals',q:'What is the difference between verification and validation?',
+tags:['tb','tp'],tagNames:['Always asked','Concepts'],
+ans:'<b>Verification</b> = "Are we building it right?" — checking that the product matches specifications. Done through reviews, walkthroughs, and inspections. The software does not need to run. <b>Validation</b> = "Are we building the right thing?" — checking that the product meets actual business needs and user expectations. Done by running and testing the software. A system can pass verification (matches the spec exactly) but fail validation (the spec was wrong, users hate it).',
+proj:'On HIMS, verification included reviewing the SRS before coding started — I found the discharge process was underspecified (no mention of what happens with outstanding bills). Raising this in verification saved 2 weeks of rework that would have happened post-development.'},
+
+{id:3,level:'basic',cat:'Fundamentals',q:'What is the STLC? Name all phases and what you deliver at each.',
+tags:['tb','tg'],tagNames:['Must know','Process'],
+ans:'Software Testing Life Cycle has 6 phases:<br><b>1. Requirement Analysis</b> — Review SRS, identify testable requirements, build RTM. Deliverable: RTM draft.<br><b>2. Test Planning</b> — Define scope, tools, schedule, resources. Deliverable: Test Plan.<br><b>3. Test Case Design</b> — Write test cases, prepare test data. Deliverable: Test case document.<br><b>4. Environment Setup</b> — Configure test environments, tools, data. Deliverable: Ready environment.<br><b>5. Test Execution</b> — Execute tests, log defects. Deliverable: Execution report, defect logs.<br><b>6. Test Closure</b> — Metrics analysis, lessons learned, sign-off. Deliverable: Test summary report.',
+proj:'On IEIMS with 10+ modules, skipping Requirement Analysis caused rework on 3 modules where requirements were ambiguous. After that, I enforced formal requirement review as a mandatory STLC entry — raising ambiguities before development started.'},
+
+{id:4,level:'basic',cat:'Fundamentals',q:'What is the difference between Smoke, Sanity, and Regression testing?',
+tags:['tb','tg'],tagNames:['Always asked','Core'],
+ans:'<b>Smoke testing</b>: Is the build stable enough to test at all? Runs 10–15 critical test cases after every new build. If smoke fails, reject the build immediately — no deep testing. <b>Sanity testing</b>: After a specific bug fix or change, test that exact area and 2–3 adjacent flows. Narrow and focused. Not a full suite. <b>Regression testing</b>: Before every release, verify that recent changes have not broken existing functionality. Broad coverage — can be automated. The goal is catching unintended side effects.',
+proj:'On LMS: after a developer fixed a quiz submission bug, I ran sanity on the quiz module (10 min). For the weekly release, I ran full Playwright regression (25 min in CI). Different tools for different purposes.'},
+
+{id:5,level:'basic',cat:'Fundamentals',q:'What is the difference between severity and priority? Give a conflict example.',
+tags:['tb','tr'],tagNames:['Always asked','Conflict'],
+ans:'<b>Severity</b> = how badly does this break the system? Set by QA based on technical impact. Scale: Critical, High, Medium, Low. <b>Priority</b> = how urgently should this be fixed? Set by PM based on business needs. Scale: P1, P2, P3. They often conflict: <b>High Severity / Low Priority:</b> System crashes when 10,000 characters entered in a comment field — technically severe, but virtually impossible in real use. Fix eventually. <b>Low Severity / High Priority:</b> CEO\'s name misspelled on the login page. Minor cosmetic bug — but must be fixed before the investor demo tomorrow.',
+proj:'On HIMS: the hospital director noticed a wrong phone number in the footer — cosmetic (Low severity) but the hospital director wanted it fixed before an inspection (P1 priority). I classify both separately in Jira so the PM makes the priority call with full context.'},
+
+{id:6,level:'basic',cat:'Test Design',q:'Explain Equivalence Partitioning with a real example from your project.',
+tags:['tb','tg'],tagNames:['EP','Core technique'],
+ans:'Equivalence Partitioning divides input data into groups where all values in a group behave identically. Test one value per partition — no need to test every value. <b>Partitions:</b> Invalid below range, Valid range, Invalid above range. For each partition you only need one representative test value.',
+proj:'IEIMS student age field accepted 5–18. Partitions: below 5 (invalid), 5–18 (valid), above 18 (invalid). Test values: 2, 10, 22. Testing with value 2 found that the system accepted it and created a student record with age 2 — lower bound validation was missing on the backend. EP with just 3 values caught a bug that 100 random values in the valid range would never have found.'},
+
+{id:7,level:'basic',cat:'Test Design',q:'What is Boundary Value Analysis and why do defects cluster at boundaries?',
+tags:['tb','tr'],tagNames:['BVA','Defects hide here'],
+ans:'BVA tests at the exact edges of valid ranges: <b>just below minimum, at minimum, at maximum, just above maximum.</b> Defects cluster here because developers often write off-by-one errors: <span style="font-family:var(--font-mono);font-size:11px;background:var(--color-background-secondary);padding:1px 4px;border-radius:3px;">if (age < 18)</span> instead of <span style="font-family:var(--font-mono);font-size:11px;background:var(--color-background-secondary);padding:1px 4px;border-radius:3px;">if (age <= 18)</span>. For range 5–18: test values 4, 5, 18, 19. BVA and EP are always used together — EP finds the partitions, BVA tests the exact edges.',
+proj:'HIMS blood pressure field accepted 60–250 mmHg. BVA at exactly 250 found a false critical alert — developer wrote < 250 instead of <= 250. A value of 250 is clinically valid but was triggering an emergency warning. EP alone (using 150) would have passed every time.'},
+
+{id:8,level:'basic',cat:'Test Design',q:'What is a test case? What are all the fields a good test case must have?',
+tags:['tb','tg'],tagNames:['Fundamentals','Documentation'],
+ans:'A test case is a documented set of conditions and steps to verify a specific behavior. <b>Required fields:</b> Test Case ID (linked to requirement), Title (action-based), Preconditions (what must be true before execution), Test Steps (numbered, atomic, reproducible), Test Data (exact values), Expected Result (precise observable outcome), Actual Result (filled during execution), Status (Pass/Fail/Blocked/Skipped), Linked Requirement ID.',
+warn:'Never write vague expected results like "user logs in successfully." Be precise: "User is redirected to /dashboard, username appears in header, session token stored in cookie." Vague expected results create disagreements about whether a test passed.'},
+
+{id:9,level:'basic',cat:'Test Design',q:'What is exploratory testing? How is it different from ad-hoc testing?',
+tags:['tg','tp'],tagNames:['Senior skill','Important'],
+ans:'<b>Exploratory testing</b> is structured, intentional, and documented. It uses a <b>charter</b> (defined goal and time-box) and takes session notes during execution. It is guided by tester skill and domain knowledge. <b>Ad-hoc testing</b> is random clicking with no plan, no charter, no documentation. Exploratory testing is a professional technique. Ad-hoc is not repeatable and should not be in a QA strategy.',
+proj:'IEIMS report generation — charter: "Explore report module focusing on large datasets and special characters — 60 minutes." This session found 4 bugs including Bengali character corruption in PDF exports. Ad-hoc testing with no focus would have tested the obvious happy path and stopped.'},
+
+{id:10,level:'basic',cat:'Test Design',q:'What is the Test Pyramid and how do you apply it?',
+tags:['tb','tg'],tagNames:['Strategy','Architecture'],
+ans:'The Test Pyramid has 3 layers: <b>Unit tests (base — most)</b>: Fast, cheap, isolated. Written by developers. Thousands of them. <b>Integration/API tests (middle)</b>: Test interactions between components. Hundreds. Slower than unit tests. <b>E2E/UI tests (top — least)</b>: Slow, expensive, brittle. Cover only critical user journeys. The pyramid shape means you should have the most unit tests and fewest E2E tests. Inverted pyramids (too many E2E) are fragile and slow.',
+proj:'On IEIMS my Playwright suite was the top layer — 150 E2E tests covering only critical paths. Postman API tests covered the middle layer. Unit tests were the developers\' responsibility. I avoided automating every UI path — only the ones where E2E coverage adds unique value that API tests can\'t provide.'},
+
+{id:11,level:'basic',cat:'Process',q:'What is an RTM (Requirement Traceability Matrix) and how did you use it?',
+tags:['tb','tg'],tagNames:['Documentation','Traceability'],
+ans:'RTM maps every business requirement to one or more test cases, and tracks their execution status and linked defects. <b>Columns:</b> Requirement ID, Requirement description, Test Case ID(s), Test status, Defect ID(s). <b>Purpose:</b> Ensure no requirement is untested. Prove test coverage. Identify gaps before release. Answer stakeholder questions about coverage instantly.',
+proj:'IEIMS had government audit requirements — I maintained RTM in Google Sheets updated every sprint. Before each release I ran a coverage check: any requirement with no green test case was raised as a release risk. During a ministry audit, the RTM proved 100% requirement coverage — something the previous team couldn\'t demonstrate.'},
+
+{id:12,level:'basic',cat:'Process',q:'What are entry and exit criteria? Why are they important?',
+tags:['tb','ta'],tagNames:['Process','Often missed'],
+ans:'<b>Entry criteria</b> — conditions that must be met before testing begins: build deployed to test environment, requirements signed off, test data prepared, no P1 blockers from development. <b>Exit criteria</b> — conditions that define when testing is complete: 100% test cases executed, zero Critical bugs open, 95%+ test pass rate, all High bugs fixed or formally accepted, UAT sign-off received. Without these, release decisions are subjective opinions — with them, they are objective facts.',
+proj:'Before HIMS go-live, the PM wanted to start UAT 2 days early. My entry criteria said the test environment must match production config. The current env was missing the production database replication setup. I held UAT until it matched — which was the right call: 3 bugs found in UAT that would have been environment-specific misses otherwise.'},
+
+{id:13,level:'basic',cat:'Process',q:'What is defect lifecycle? Walk through all states.',
+tags:['tb','tg'],tagNames:['Defect management','Process'],
+ans:'<b>New</b> → QA logs the bug. <b>Assigned</b> → PM/lead assigns to developer. <b>Open/In Progress</b> → Developer is working on it. <b>Fixed</b> → Developer marks it resolved. <b>Ready for Retest</b> → Deployed to test env for QA to verify. <b>Retest/Verified</b> → QA confirms fix works. <b>Closed</b> → Bug resolved. <b>Reopened</b> → Fix didn\'t work, bug persists — goes back to Open. <b>Rejected</b> → Developer disputes it (not a bug, by design, duplicate). <b>Deferred</b> → Valid bug but not fixing in this release.',
+proj:'On IEIMS I tracked 1,200+ defects through this lifecycle in Jira. The most important state I managed carefully was Rejected — if I disagreed with a rejection, I\'d bring the requirement document and re-open with evidence. Defects shouldn\'t be closed by developer opinion alone.'},
+
+{id:14,level:'basic',cat:'Process',q:'What is the difference between functional and non-functional testing?',
+tags:['tb','tp'],tagNames:['Concepts','Fundamentals'],
+ans:'<b>Functional testing</b> verifies what the system does — does it perform the specified functions correctly? Login works, data saves, calculations are correct. Validates business requirements. <b>Non-functional testing</b> verifies how the system performs — speed, security, reliability, usability. Performance testing (k6, JMeter), security testing (OWASP ZAP), load testing — all non-functional. Both are required for production-ready software. Functional correctness + non-functional reliability = quality.',
+proj:'IEIMS functional: student enrollment saves correctly, exam results display accurately. IEIMS non-functional: system handles 1,000 concurrent users (performance), JWT tokens cannot be tampered (security), system uptime during exam result day (reliability). My QA strategy covered both.'},
+
+{id:15,level:'basic',cat:'Process',q:'What is UAT and what is your role in it as a senior QA?',
+tags:['tb','tg'],tagNames:['UAT','Stakeholder'],
+ans:'User Acceptance Testing is the final validation phase where business stakeholders test the software to confirm it meets their needs before go-live. <b>QA\'s role in UAT at senior level:</b> Prepare UAT test scenarios (business-language, not technical). Set up the UAT environment. Train business users on how to test. Support during execution — answer questions, log issues they find. Triage UAT defects — assess severity and go-live impact. Facilitate the sign-off process.',
+proj:'HIMS UAT: I prepared 40 UAT scenarios in plain Bengali/English for clinical staff who are not technically trained. Conducted a 2-hour walkthrough session with the hospital operations team. During UAT, a nurse found that the patient admission form didn\'t auto-populate the referring doctor\'s name — a workflow requirement missed in the SRS. UAT by real users catches what QA can\'t.'},
+
+// INTERMEDIATE (16-35)
+{id:16,level:'intermediate',cat:'Test Design',q:'Explain Decision Table testing with a real example. When do you use it?',
+tags:['tp','tb'],tagNames:['Complex logic','Business rules'],
+ans:'Decision tables are used when multiple input conditions combine to produce different outcomes. Structure: rows = conditions (Y/N), columns = all combinations, bottom = expected action. For N conditions, you have 2^N combinations to cover systematically.',
+proj:'LMS quiz access: 3 conditions — enrolled (Y/N), prerequisite done (Y/N), instructor unlocked (Y/N) = 8 combinations. Without a decision table, developers test Y/Y/Y and N/N/N. My table found that Y/N/Y (enrolled, prereq not done, unlocked) showed a generic "Access denied" instead of "Complete prerequisite module first." Students had no actionable guidance. Decision table was the only way to systematically cover all 8 paths.'},
+
+{id:17,level:'intermediate',cat:'Test Design',q:'What is State Transition testing? Walk through a real example.',
+tags:['tt','tb'],tagNames:['Workflows','State machine'],
+ans:'State Transition testing maps all states a system can be in, and tests both valid transitions (allowed) and invalid transitions (should be blocked). It\'s essential for any feature with a lifecycle: order processing, patient records, account status, ticket management.',
+proj:'HIMS patient lifecycle: Registered → Admitted → Under Treatment → Discharged → Archived. I tested invalid transitions: can a Registered patient be Discharged (skipping Admission and Treatment)? Yes — the API accepted it and created a discharge record with empty admission and treatment fields. A corrupted medical record. State transition testing of invalid paths found a data integrity defect that functional happy-path testing completely missed.'},
+
+{id:18,level:'intermediate',cat:'Test Design',q:'What is the difference between black-box, white-box, and grey-box testing?',
+tags:['tb','tp'],tagNames:['Core concepts','Test types'],
+ans:'<b>Black-box testing</b>: Tester has no knowledge of internal code. Tests based on requirements and expected behavior only. All manual functional testing, API testing, UAT. <b>White-box testing</b>: Tester has full code access. Tests internal logic, code paths, coverage. Typically done by developers (unit tests). <b>Grey-box testing</b>: Partial code knowledge. Tester knows the architecture and database structure but not implementation details. API testing with knowledge of the data model is grey-box. At senior QA level, grey-box is most powerful — knowing the DB schema helps you test data integrity without seeing the code.',
+proj:'IEIMS API testing was grey-box: I knew the database schema (student table, enrollment table, foreign keys) without access to the source code. This let me test data integrity: after creating a student via API, I queried the DB directly to confirm the record was created with correct foreign key relationships — something black-box testing can\'t do.'},
+
+{id:19,level:'intermediate',cat:'Test Design',q:'What is risk-based testing and how do you build a risk matrix?',
+tags:['tr','tb'],tagNames:['Senior strategy','Priority'],
+ans:'Risk-based testing allocates testing effort proportional to business risk. <b>Risk = Likelihood of failure × Business impact.</b> Score both on 1–5. Modules above score 15 get full regression + exploratory. Score 6–14 get regression only. Below 6 get smoke or are deferred. Factors that increase likelihood: new code, complex logic, recently changed module, integration points. Factors that increase impact: user-facing, financial, compliance, high traffic volume.',
+proj:'HIMS risk matrix: Patient billing (Likelihood 5 × Impact 5 = 25) → full coverage. Patient profile update (Likelihood 2 × Impact 3 = 6) → smoke only. This directed 3 of 5 testing days to billing and discharge. The billing module had 2 critical bugs that would have caused direct financial loss. The profile update module had zero bugs. Risk-based allocation was correct.'},
+
+{id:20,level:'intermediate',cat:'Defect Management',q:'What makes a great bug report? What must it include?',
+tags:['tb','tg'],tagNames:['Quality','Best practice'],
+ans:'A great bug report enables any developer to reproduce the bug in under 2 minutes without asking a single clarifying question. <b>Must include:</b> Clear title with module name, Environment (browser, OS, server, build version), Severity AND priority with justification, Numbered reproducible steps, Exact test data used, Expected result (from requirement), Actual result (what actually happened), Evidence (screenshot, video, network log), Business impact (who is affected and what is the consequence).',
+proj:'IEIMS JWT tampering bug report: I included the exact modified token value, a video of the reproduction, the OWASP A02 category reference, and the business impact: "Any authenticated student can access all 47 admin accounts\' data." That business impact line made it impossible to downgrade the severity. The fix was deployed within 4 hours.'},
+
+{id:21,level:'intermediate',cat:'Process',q:'What is shift-left testing and how do you practice it in Agile/Scrum?',
+tags:['tb','tg'],tagNames:['Modern practice','Agile'],
+ans:'Shift-left means moving testing activities earlier in the SDLC — finding defects in requirements and design before code is written. <b>Practical activities:</b> Attend sprint planning, review user stories before dev starts, challenge vague acceptance criteria, write test cases alongside development (not after), participate in design reviews, raise ambiguities immediately. The cost of fixing a defect found in requirements is ~1x. Found in production: ~100x.',
+proj:'IEIMS sprint planning: I reviewed a user story for exam result publication. The acceptance criteria said "notify students when results are published." I asked: via email, SMS, or in-app? If it fails, is it silent or retried? These questions found 2 missing requirements before a single line of code was written. Without shift-left, those gaps would have become production bugs.'},
+
+{id:22,level:'intermediate',cat:'Process',q:'How do you write test cases from requirements that are vague or incomplete?',
+tags:['ta','tb'],tagNames:['Real challenge','Senior skill'],
+ans:'<b>Step 1:</b> Identify all ambiguities — document every "what happens if...?" question. <b>Step 2:</b> Raise them with the BA/PM before dev starts (shift-left). <b>Step 3:</b> For still-ambiguous areas, test the most common user behavior as the happy path and test all reasonable interpretations as negative cases. <b>Step 4:</b> Mark ambiguous test cases clearly in the RTM so stakeholders know they need confirmation. Never assume — always document your assumption.',
+proj:'HIMS discharge requirement said "validate patient is ready for discharge." No criteria defined for "ready." I listed questions: Does ready mean no outstanding bills? Minimum hospital stay met? Doctor sign-off received? I tested all 3 — and found that only doctor sign-off was validated. Bill clearance and minimum stay were not. Two of my three test cases failed — revealing two gaps in implementation that matched two gaps in the requirement.'},
+
+{id:23,level:'intermediate',cat:'Process',q:'How do you handle testing when the deadline is tight and you cannot test everything?',
+tags:['ta','tb'],tagNames:['Pressure','Decision making'],
+ans:'<b>Step 1:</b> Apply risk-based testing immediately — identify the top 20% of functionality that covers 80% of business risk. <b>Step 2:</b> Prioritize: Critical path first, regression on recently changed areas, skip low-risk stable modules. <b>Step 3:</b> Use automation for stable regression — run it in CI while doing manual exploratory in parallel. <b>Step 4:</b> Document what was NOT tested and communicate the risk to the PM in writing. Never silently skip testing — always make the risk visible and let stakeholders make the informed decision.',
+proj:'IEIMS had a hard government deadline — 5 days cut to 3 days by client scope addition. I built a risk matrix in 30 minutes, identified 5 critical modules, tested those fully, ran smoke on 4 low-risk modules, and skipped 2 stable modules that hadn\'t been touched in 2 sprints. Sent PM a written list of untested areas with risk assessment. No critical production issue from untested areas.'},
+
+{id:24,level:'intermediate',cat:'Process',q:'What is test coverage and how do you measure it?',
+tags:['tb','tg'],tagNames:['Metrics','Quality'],
+ans:'<b>Requirement coverage</b>: Requirements tested / Total requirements × 100. Measured via RTM. <b>Test case coverage</b>: Test cases executed / Total test cases × 100. Tracked in test execution report. <b>Code coverage</b>: Lines of code exercised by tests / Total lines × 100. Measured by developer tools (not QA). <b>Risk coverage</b>: High-risk items tested / Total high-risk items × 100. Most important metric. Coverage numbers without context are misleading — 95% test pass rate means nothing if the 5% failures are in the most critical module.',
+proj:'IEIMS pre-release: 100% requirement coverage (all RTM rows green), 97% test pass rate, 3 remaining failures were low-risk cosmetic issues. I reported this as "Ready for release with 3 known cosmetic issues to be fixed in next sprint." Not just a number — a decision-ready statement.'},
+
+{id:25,level:'intermediate',cat:'Process',q:'What are the different types of testing in your test strategy? Which types did you use on IEIMS?',
+tags:['tb','tg'],tagNames:['Strategy','Coverage'],
+ans:'<b>Functional:</b> Unit, Integration, System, UAT. <b>Non-functional:</b> Performance, Load, Stress, Security, Usability. <b>Maintenance:</b> Regression, Smoke, Sanity. <b>Structural:</b> White-box, API-level validation.',
+proj:'IEIMS full strategy: Functional (900+ test cases across all modules), Integration (API chaining with Postman — student create → enroll → document upload), System (end-to-end journeys through all roles), UAT (with ministry staff), Regression (Playwright automation — 150 cases), Performance (k6 — 1,000+ concurrent users before exam result day), Security (OWASP ZAP basic scan, JWT manipulation testing, RBAC validation). All 8 types run at different stages.'},
+
+{id:26,level:'intermediate',cat:'Defect Management',q:'A developer marks your bug as "Cannot Reproduce." What do you do?',
+tags:['ta','tr'],tagNames:['Conflict','Real situation'],
+ans:'<b>Step 1:</b> Check if the environment matches. The bug might be environment-specific. <b>Step 2:</b> Provide a video recording of the reproduction — no more "cannot reproduce" arguments possible with a video. <b>Step 3:</b> Document exact test data, browser, OS, and user account used. <b>Step 4:</b> Re-produce it on developer\'s machine if possible, or ask them to watch while you reproduce. <b>Step 5:</b> If it\'s intermittent, run it 10+ times to capture the pattern and frequency. Never close a bug because a developer says "I can\'t reproduce it" without thorough investigation.',
+proj:'IEIMS login test: I reported an intermittent session timeout bug. Developer said cannot reproduce. I ran the scenario 20 times, captured it happening 7 times, and recorded all 7 as a video with timestamps. Developer then confirmed it was a race condition in session management. Video evidence is the most effective tool against "cannot reproduce."'},
+
+{id:27,level:'intermediate',cat:'Defect Management',q:'What is a showstopper and when do you escalate to block a release?',
+tags:['tr','tb'],tagNames:['Critical decision','Release gate'],
+ans:'A <b>showstopper</b> is a Critical defect that must be fixed before any release. Criteria to block: affects core user journeys (login, primary workflow, data submission), causes data loss or corruption, is a security vulnerability, or violates regulatory/compliance requirements. <b>Escalation process:</b> Raise as Critical blocker in Jira, document the business impact clearly, notify PM directly (not just in Jira), propose options (delay, partial release, hotfix plan). Present options, not just problems — always recommend a path forward.',
+proj:'Two hours before IEIMS go-live, I found a dashboard showing incorrect student count — 48,230 vs actual 53,410. Ministry officials would see this in 2 hours. I immediately documented, notified PM with 3 options and a recommendation. Option chosen: 1-hour delay while dev investigated. Root cause: stale cache. Fixed in 40 minutes. Released on time with correct data. Blocking was the right call.'},
+
+{id:28,level:'intermediate',cat:'Defect Management',q:'What is a regression defect? How do you prevent it?',
+tags:['tb','tg'],tagNames:['Regression','Quality'],
+ans:'A regression defect is a bug in previously working functionality that was broken by a new code change. They occur when developers fix one thing and accidentally break another. <b>Prevention:</b> Automation regression suite run on every PR (catches regression instantly), code reviews that include test impact analysis, clear Definition of Done that includes regression testing, and maintaining good test coverage on stable features.',
+proj:'IEIMS: a developer fixed a student search performance issue by modifying the query. The fix broke the search filter for district-level admin (different WHERE clause). Our Playwright automation caught this regression 12 minutes after the PR was opened — before anyone reviewed the code. Without automation, this would have been found in UAT or production.'},
+
+{id:29,level:'intermediate',cat:'Process',q:'How do you test a feature that has no written requirements?',
+tags:['ta','tg'],tagNames:['Real challenge','Judgment'],
+ans:'<b>Step 1:</b> Use the existing product behavior as the baseline — test that the new feature matches the established UX patterns. <b>Step 2:</b> Interview the developer or PM to understand the intended behavior — document their answers as informal requirements. <b>Step 3:</b> Apply domain knowledge — for a hospital system, you know patient data must be protected, discharge requires billing clearance, etc. <b>Step 4:</b> Use exploratory testing with heuristics: SFDIPOT (Structure, Function, Data, Integration, Platform, Operations, Time). <b>Step 5:</b> Flag the missing requirements to management formally — you cannot be held responsible for bugs in undocumented behavior.',
+proj:'HIMS had an appointment rescheduling feature added mid-sprint with no written requirements. I interviewed the doctor who requested it, wrote informal acceptance criteria, tested against those, and formally noted in the test report that this feature had no SRS coverage. Protected myself professionally while still testing thoroughly.'},
+
+{id:30,level:'intermediate',cat:'Test Design',q:'What is the difference between test cases and test scenarios?',
+tags:['tb','tp'],tagNames:['Terminology','Concepts'],
+ans:'<b>Test scenario:</b> High-level "what to test" — describes the feature or functionality to be tested without detailed steps. Example: "Verify student can enroll in a school." <b>Test case:</b> Detailed "how to test" — specific steps, test data, preconditions, and expected results. Multiple test cases cover one scenario. Test scenarios come first (from requirements), test cases expand each scenario into concrete, executable steps. At senior level you own both — writing scenarios from requirements and expanding them into precise test cases.',
+proj:'IEIMS scenario: "Verify student enrollment process." Test cases from this scenario: TC-001 Enroll with valid data (happy path), TC-002 Enroll without selecting school (validation), TC-003 Enroll duplicate student (uniqueness check), TC-004 Enroll as unauthorized role (access control). One scenario, four distinct test cases.'},
+
+{id:31,level:'intermediate',cat:'Process',q:'How do you manage test data? What are the challenges?',
+tags:['tb','ta'],tagNames:['Test data','Practical'],
+ans:'<b>Test data challenges:</b> Production data cannot be used in test environments (privacy). Test data becomes stale as the product evolves. Multiple testers sharing data causes conflicts. Special cases (edge values, boundary data) need to be created manually. <b>Best practices:</b> Create test data via API (faster, more reliable than UI), isolate data per test (each test creates and teardown its own data), maintain a test data catalog for complex scenarios, use realistic but fictional data (real names/numbers create GDPR risks).',
+proj:'IEIMS: 3.2 million student records in production — I could not use any of them in testing. I built a test data set of 500 synthetic students covering all districts, school types, and grade levels. Used Postman to create them via API before test cycles, and a cleanup collection to delete them after. This meant every test run started with a known, clean state.'},
+
+{id:32,level:'intermediate',cat:'Process',q:'What is a test plan and what must it contain at senior level?',
+tags:['tb','tg'],tagNames:['Documentation','Leadership'],
+ans:'A test plan defines the scope, strategy, resources, timeline, and approach for a testing effort. <b>8 mandatory sections:</b> Scope (in/out of scope), Objectives (what QA will achieve), Strategy (testing types, tools, automation approach), Resources (team, environments, data), Schedule (phases aligned to sprint/release), Entry/Exit criteria (when to start/stop), Risk & Mitigation (known risks and contingencies), Deliverables (reports, metrics, sign-offs). At senior level you own the test plan — write it, get stakeholder sign-off, and track against it every sprint.',
+proj:'IEIMS test plan was a 12-page document covering all 10+ modules. It included a risk matrix, automation coverage targets, and explicit entry criteria for UAT. The ministry required the test plan as part of project documentation for audit purposes. Having a formal test plan meant the QA process was defensible and auditable.'},
+
+{id:33,level:'intermediate',cat:'Defect Management',q:'What metrics do you track as a senior QA? How do you use them?',
+tags:['tb','tg'],tagNames:['Metrics','Leadership'],
+ans:'<b>6 key metrics:</b> <b>Defect Escape Rate</b> (bugs in production / total bugs) — QA effectiveness. <b>Test Pass Rate</b> (passed / executed) — release readiness. <b>Defect Detection Rate</b> (QA found / total found) — how much we catch before users. <b>Test Coverage</b> (requirements tested / total) — gap identification. <b>Automation Coverage</b> (automated / total test cases) — automation ROI. <b>Defect Resolution Time</b> — dev-QA velocity. Report trends not snapshots — "pass rate improved from 88% to 97% this sprint" is more useful than just "97%."',
+proj:'IEIMS weekly QA report: Pass rate 94% (up from 87% last sprint), Defect escape rate 0% (third consecutive release), 12 new defects this sprint (8 High, 3 Medium, 1 Low), automation coverage 62% of regression suite. PM used this to communicate quality status to the ministry client without technical jargon.'},
+
+{id:34,level:'intermediate',cat:'Process',q:'What is the difference between integration testing and system testing?',
+tags:['tb','tp'],tagNames:['Test types','Concepts'],
+ans:'<b>Integration testing:</b> Tests interactions between 2 or more specific modules. Narrow scope. Goal: verify that modules communicate correctly — data passed from Module A is correctly received and processed by Module B. <b>System testing:</b> Tests the entire application as a complete system against requirements. Broad scope. Goal: verify the complete product meets its specification. System testing comes after integration testing — you can\'t test the whole system if the module connections are broken.',
+proj:'HIMS integration testing: Billing module → Discharge module integration. Does outstanding balance in billing prevent discharge in the discharge module? (Answer: initially it didn\'t — that was an integration bug.) System testing: complete patient journey from registration through admission, treatment, billing, and discharge — the full workflow across all 5 modules working together.'},
+
+{id:35,level:'intermediate',cat:'Process',q:'How do you ensure quality in an Agile/Scrum team with fast release cycles?',
+tags:['tb','tg'],tagNames:['Agile','CI/CD'],
+ans:'<b>5 practices for Agile quality:</b> 1. Test within the sprint — start testing the moment a feature is dev-complete, not at sprint end. 2. Automate regression — CI catches breakage on every PR. 3. Shift-left — review requirements in sprint planning, not after dev. 4. Definition of Done includes QA-verified — no story is Done until tested. 5. Daily sync — communicate test status in standup, raise blockers same day. Sprint velocity is not your concern — quality is. If a story isn\'t ready, it goes back, not forward.',
+proj:'IEIMS: 2-week sprints with 8–10 stories per sprint. I started testing on day 3 (when first features were dev-complete) — not day 14. Playwright CI caught regressions same day they were introduced. Definition of Done strictly required QA sign-off. In 8 consecutive sprints, zero Critical bugs reached UAT.'},
+
+// ADVANCED (36-50)
+{id:36,level:'advanced',cat:'Strategy',q:'How do you define a QA strategy for a large government platform from scratch?',
+tags:['tr','tb'],tagNames:['Senior leadership','Strategy'],
+ans:'<b>Step 1 — Understand the system:</b> Read SRS, architecture diagrams, user roles, regulatory requirements. <b>Step 2 — Risk mapping:</b> Classify all modules by likelihood × impact. <b>Step 3 — Define testing types:</b> For each module, decide which testing types apply. <b>Step 4 — Automation decision:</b> What to automate (stable, high-risk, repetitive) vs keep manual. <b>Step 5 — Define quality gates:</b> What must be true before each phase starts and ends. <b>Step 6 — Resource planning:</b> How many test cycles, how many testers, what tools. <b>Step 7 — Stakeholder communication:</b> How will you report status and what does a release recommendation look like?',
+proj:'IEIMS strategy from scratch: mapped 10+ modules, identified exam results and student enrollment as highest risk (government data, millions of users). Defined 4 testing layers (functional, API, performance, UAT). Quality gates: no UAT until regression green, no go-live until performance thresholds met and ministry UAT signed. Strategy document was 15 pages and became the QA framework used across subsequent government projects at the company.'},
+
+{id:37,level:'advanced',cat:'Strategy',q:'What is test debt and how do you manage it?',
+tags:['tr','ta'],tagNames:['Senior concept','Long term'],
+ans:'Test debt is the accumulation of untested code, outdated test cases, flaky tests, and inadequate coverage that builds up when testing shortcuts are taken to meet deadlines. Like technical debt, it compounds — deferred testing becomes harder to address as the codebase grows. <b>Management strategies:</b> Track it explicitly (a backlog item, not invisible work), allocate 20% of each sprint to debt reduction, prioritize by risk (fix debt on high-risk modules first), automate test case maintenance by keeping tests tied to requirements, and make debt visible to PM so it\'s a business decision to incur it.',
+proj:'After 6 months on IEIMS, we had 80+ outdated test cases and 15 flaky automated tests — accumulated from fast sprints. I dedicated 1 sprint to test debt: deleted 30 obsolete cases, updated 50, fixed all 15 flaky tests (found root causes for each). Pass rate in CI went from 87% to 99%. The sprint felt like "lost velocity" but the next 3 sprints had zero false-positive failures in CI.'},
+
+{id:38,level:'advanced',cat:'Strategy',q:'How do you test APIs for security? What specific vulnerabilities do you check?',
+tags:['tr','tp'],tagNames:['Security','OWASP'],
+ans:'<b>Authentication vulnerabilities:</b> No token (should get 401), expired token (401), tampered JWT payload (401 — verify signature check), revoked token still working (401). <b>Authorization vulnerabilities:</b> IDOR — change resource ID to another user\'s, Privilege escalation — use lower-role token on higher-role endpoint, Horizontal access — access another user\'s data with valid token. <b>Input vulnerabilities:</b> SQL injection in query params, XSS payloads in form fields, oversized payloads causing server errors. <b>Information disclosure:</b> Error messages revealing stack traces, internal IPs, database structure.',
+proj:'IEIMS JWT tampering: modified the role field in the JWT payload from "student" to "admin" and re-sent. API returned 200 with full admin data — server wasn\'t verifying the JWT signature, only decoding the payload. HIMS IDOR: changed patient ID in GET /patients/{id}/records from my patient ID to another patient\'s ID — returned that patient\'s complete medical history. Both Critical security bugs found through systematic API security testing.'},
+
+{id:39,level:'advanced',cat:'Strategy',q:'How do you coordinate testing across a team of 20+ developers with multiple modules being developed simultaneously?',
+tags:['tb','tg'],tagNames:['Lead role','Coordination'],
+ans:'<b>Module ownership model:</b> Each developer group has a designated QA contact for their module that sprint. <b>Dependency mapping:</b> Identify integration points between modules being developed in parallel — test those integrations explicitly. <b>Feature flags:</b> If a feature isn\'t ready for full testing, use a flag to isolate it from regression. <b>Staged readiness:</b> Modules are "QA-ready" in batches — don\'t wait for all 20 developers to finish. Test as features complete. <b>CI as coordination:</b> GitHub Actions PR tests catch cross-module regressions automatically — no manual coordination needed for regression.',
+proj:'IEIMS had 5 developer teams working on 5 modules simultaneously. I created a daily "QA status board" in Jira showing: which features were QA-ready, which were blocked, which had open critical bugs. Each team lead had a 10-minute slot with me every 2 days. The board removed the need for everyone to attend the same meetings — each team saw only their status.'},
+
+{id:40,level:'advanced',cat:'Process',q:'Describe your complete testing process for a new feature from requirement to sign-off.',
+tags:['tg','tb'],tagNames:['End to end','Process'],
+ans:'<b>Stage 1 — Requirement (Sprint planning):</b> Review user story, challenge acceptance criteria, raise ambiguities, estimate QA effort. <b>Stage 2 — Test design (During dev):</b> Write test cases, prepare test data, update RTM. <b>Stage 3 — Smoke (Feature dev-complete):</b> 5-minute smoke — is it stable enough to test? <b>Stage 4 — Functional (Day 1–2):</b> Execute all test cases, log defects with business impact. <b>Stage 5 — Integration (Day 2–3):</b> Test this feature\'s interaction with all dependent modules. <b>Stage 6 — Regression (Before release):</b> Run automated suite — confirm no regressions introduced. <b>Stage 7 — UAT (If applicable):</b> Support stakeholder validation. <b>Stage 8 — Sign-off:</b> Document pass/fail metrics, open issues, release recommendation.',
+proj:'HIMS patient discharge feature: Day 0 — found billing gap in requirements (raised before dev). Day 3 — feature dev-complete, smoke passed. Day 4-5 — 40 test cases executed, 3 bugs found. Day 6 — integration tested with billing module (found the outstanding balance bug — discharge allowed without payment). Day 7 — bug fixed, re-tested, integration re-passed. Day 8 — automated regression green. Go-live recommendation issued with zero open High/Critical bugs.'},
+
+{id:41,level:'advanced',cat:'Defect Management',q:'How do you prioritize which bugs to fix when there are 50 open bugs and only 3 days to release?',
+tags:['tr','tb'],tagNames:['Triage','Decision making'],
+ans:'<b>4-step triage process:</b> <b>Step 1 — Classify by release-blocking criteria:</b> Critical bugs = fix or delay release. High bugs affecting core journeys = fix or get formal PM acceptance. Medium/Low = document and defer. <b>Step 2 — Group by effort:</b> Some High bugs take 30 minutes to fix. Prioritize the high-impact, low-effort ones. <b>Step 3 — Check dependencies:</b> Does bug A need to be fixed before bug B can be retested? Sequence accordingly. <b>Step 4 — Communicate openly:</b> Give PM a clear picture — "5 bugs must be fixed, 20 are safe to defer, 25 are cosmetic backlog items."',
+proj:'IEIMS pre-release with 47 open bugs and 3 days to go-live: I ran triage in 1 hour. 3 Critical — mandatory fix. 8 High — 5 were core journey bugs (fix), 3 were edge cases (PM accepted risk in writing). 36 Medium/Low — deferred to next sprint. Communicated a "release readiness report" to PM with exactly this breakdown. Release went ahead, zero production Critical incidents from the 3 deferred High bugs.'},
+
+{id:42,level:'advanced',cat:'Process',q:'How do you handle testing of a feature that involves third-party integrations?',
+tags:['tb','ta'],tagNames:['Integration','Advanced'],
+ans:'<b>Step 1 — Identify the integration boundary:</b> What data do we send, what do we expect to receive? <b>Step 2 — Mock the third party for unit/integration testing:</b> Use a mock server to test your code\'s behavior without relying on the third party. <b>Step 3 — Test with sandbox environment:</b> Most third parties provide a sandbox. Test all scenarios there. <b>Step 4 — Test failure scenarios:</b> What happens when the third party is down? Times out? Returns unexpected data? Your system must handle these gracefully. <b>Step 5 — Monitor in production:</b> Third-party integrations fail in ways you can\'t predict. Set up alerts.',
+proj:'HIMS SMS notification integration (patient appointment reminders via third-party SMS gateway): I tested with the gateway\'s sandbox. Happy path (SMS sent), invalid number (graceful error, not crash), gateway timeout (system queued the message and retried), gateway returns 500 (error logged, patient not notified but system continued). The timeout test found that the UI hung indefinitely waiting for gateway response — a UX blocking bug.'},
+
+{id:43,level:'advanced',cat:'Process',q:'What do you do when you find a bug in production that should have been caught in testing?',
+tags:['tr','ta'],tagNames:['Post-mortem','Accountability'],
+ans:'<b>Immediate (same day):</b> Document the bug thoroughly. Communicate impact — how many users affected, what data at risk. Support the hotfix — be available for immediate re-testing. <b>Within 48 hours:</b> Root cause analysis — why did this escape? Was there a test case for this? Was it executed? Did it pass incorrectly? <b>Process improvement:</b> Add or fix the test case. If the test case existed but the scenario wasn\'t covered, update the test design. If the test wasn\'t executed due to time pressure, review prioritization. <b>Never blame:</b> Focus on the process gap, not the person.',
+proj:'LMS: Bengali-character filenames corrupted on Windows download — reached production. Root cause: test data only used English filenames. I added Unicode filename test cases to the upload/download suite and added a cross-platform download check to the test plan template. Next 6 months: zero file encoding bugs in production. Process fixed, not just the bug.'},
+
+{id:44,level:'advanced',cat:'Strategy',q:'How do you measure QA ROI? How do you justify the value of testing to management?',
+tags:['tb','tg'],tagNames:['Business value','Senior skill'],
+ans:'<b>Quantitative metrics:</b> Defect escape rate (bugs found in production vs in testing), cost of a production bug vs a test-phase bug, regression time saved by automation (hours saved × engineer cost), reduced hotfix deployments. <b>Business language metrics:</b> "Our automation suite saves 32 person-hours per release cycle." "Defect escape rate dropped from 8% to 0% in 3 consecutive releases." "Performance testing prevented a potential outage that would have affected 1.2 million users." <b>Key principle:</b> Never say "we found 200 bugs." Say "we prevented 200 defects from reaching users — of which 15 were Critical security or data issues."',
+proj:'IEIMS QA ROI presented to management: Playwright automation saves 32 person-hours/release = ~80,000 BDT/month in testing cost. Defect escape rate: 0% last 3 releases (was 12% before structured QA). JWT tampering bug caught pre-release: potential national data breach of 3.2 million student records prevented. That last point alone justified the entire QA program to the ministry.'},
+
+{id:45,level:'advanced',cat:'Strategy',q:'What is your approach to testing microservices architecture?',
+tags:['tb','tp'],tagNames:['Architecture','Modern systems'],
+ans:'Microservices testing is complex because failures cascade across service boundaries. <b>Testing layers:</b> Unit test each service independently (developers). Contract testing — verify the API contract between services matches expectations (consumer-driven contract testing). Integration testing — test actual service-to-service communication. End-to-end testing — test complete business flows that span multiple services. <b>Key challenges:</b> Data consistency across services, network failures between services, version mismatches when one service updates its API.',
+proj:'IEIMS was microservices-based: student service, enrollment service, result service, notification service. API chain testing in Postman tested inter-service communication. Key finding: student creation in student-service had 500ms replication lag before enrollment-service could see the new student. Integration-level test caught this timing bug — unit tests for each service individually would have missed it entirely.'},
+
+{id:46,level:'advanced',cat:'Process',q:'How do you test for data integrity across a complex system?',
+tags:['tb','tr'],tagNames:['Data quality','Critical'],
+ans:'<b>5 data integrity checks:</b> <b>Referential integrity:</b> When a student is deleted, are all enrollment records also deleted/orphaned correctly? <b>Uniqueness constraints:</b> Can the same student be enrolled twice? Can duplicate email addresses exist? <b>Cascade behavior:</b> Does deleting a school cascade correctly to all student records? <b>Transaction atomicity:</b> If step 3 of a 5-step process fails, are steps 1–2 rolled back? <b>Concurrent access:</b> Can two users edit the same record simultaneously? Which save wins? Is data corrupted?',
+proj:'IEIMS concurrent edit test: I opened the same student record in 2 browser sessions simultaneously. Both made different edits. Both saved. The second save silently overwrote the first with no conflict warning — data loss. This was a data integrity failure in a government system where student records are legal documents. Found through deliberate concurrency testing — something that never appears in scripted happy-path tests.'},
+
+{id:47,level:'advanced',cat:'Strategy',q:'How do you test usability — and does it belong in QA?',
+tags:['tp','tg'],tagNames:['Usability','UX'],
+ans:'Yes, usability belongs in QA — though it\'s often overlooked. <b>Usability testing checks:</b> Is the error message clear and actionable? (Not "Error 500" — but "Unable to save record. Please try again.") Is the navigation logical for the target user? Are loading states communicated? Are forms labeled clearly? Does the critical path require minimum clicks? At senior QA level, you\'re not just verifying "does it work" but "can a real user accomplish their goal efficiently." This is especially critical for government platforms where users may be non-technical.',
+proj:'IEIMS is used by district education officials — many are non-technical. I added usability checks to my test cases: does each error message tell the user what to do next? Are confirmation dialogs specific ("Are you sure you want to delete student record #4521 Rahim Uddin?") vs generic ("Are you sure?")? Found 12 usability issues that were technically "passing" tests but practically confusing. All 12 were fixed before government rollout.'},
+
+{id:48,level:'advanced',cat:'Strategy',q:'Explain the concept of "testing is a risk management activity." How does this change your approach?',
+tags:['tr','tb'],tagNames:['Philosophy','Senior mindset'],
+ans:'Viewing testing as risk management means: you cannot test everything, so you test the things that matter most. Every testing decision is a risk decision. "Should I test this module deeply or do a smoke?" = "How much risk am I willing to accept if this module has bugs?" This shifts the conversation from "we tested X% of features" to "we covered X% of business risk." It also means communicating untested areas as accepted risk — not invisible gaps. Management can then make informed release decisions rather than assuming everything was tested.',
+proj:'IEIMS: I never claimed to test every possible scenario. I framed it as: "We have covered 100% of Critical-risk scenarios and 95% of High-risk scenarios. 3 Low-risk modules had smoke-only coverage this sprint." This gave the PM a real risk picture. When they asked "are we safe to release?" the answer was "yes for the covered scenarios — here\'s the residual risk on the 3 smoke-only modules." Honest, professional, and defensible.'},
+
+{id:49,level:'advanced',cat:'Process',q:'How do you test a system that must comply with government regulations or healthcare standards?',
+tags:['tr','tb'],tagNames:['Compliance','High stakes'],
+ans:'<b>Step 1 — Know the regulations:</b> What data must be protected? What audit trails are required? What access controls are mandated? <b>Step 2 — Map requirements to regulations:</b> Each regulatory requirement becomes a test case in the RTM. <b>Step 3 — Compliance-specific test cases:</b> Audit log completeness (every action logged with user, timestamp, IP), data access controls (only authorized roles access sensitive data), data retention (records kept for mandated period), encryption (sensitive data encrypted at rest and in transit). <b>Step 4 — Document evidence:</b> Compliance requires proof — test execution reports become audit evidence.',
+proj:'HIMS healthcare compliance testing: verified that every patient record access was logged with doctor ID, timestamp, action type. Tested that deleted records were archived (not hard-deleted) per healthcare data retention law. Verified patient data was not visible in server error responses (information disclosure). The HIMS compliance test suite was 45 test cases specifically covering data protection and audit requirements — separate from functional testing.'},
+
+{id:50,level:'advanced',cat:'Strategy',q:'If you were starting a new QA role tomorrow, what would you do in your first 30 days?',
+tags:['tg','tb'],tagNames:['Leadership','Senior mindset'],
+ans:'<b>Week 1 — Understand the product and people:</b> Use the product as a real user. Meet developers, PMs, and stakeholders. Understand the release cadence and pain points. Read existing test cases and bug history — patterns reveal systemic problems. <b>Week 2 — Assess the QA process:</b> What testing happens? What\'s missing? What\'s the defect escape rate? Is there automation? What\'s the CI pipeline like? Document findings without judging. <b>Week 3 — Quick wins:</b> Fix the most obvious gaps (flaky tests, missing smoke tests, wrong severity classifications). Don\'t try to rebuild everything. <b>Week 4 — Present findings:</b> Share a QA health assessment with the PM — what\'s working, what needs investment, what the risk is if gaps remain. Propose a 90-day improvement plan.',
+proj:'When I joined Ethics Advance, I spent week 1 using IEIMS as a student, teacher, and admin. Found 3 bugs just as a user before writing a single formal test case. Week 2: discovered no API testing existed and no performance testing was planned before a 500,000-user launch. Week 3: set up Postman collections for the top 20 APIs. Week 4: presented a gap analysis showing performance risk with a k6 proof-of-concept showing the system crashed at 800 users. That presentation got the k6 testing program approved within the same week.'}
+];
+
+var done = new Set();
+var curFilter = 'all';
+var curSearch = '';
+
+function render(){
+  var container = document.getElementById('q-container');
+  var filtered = questions.filter(function(q){
+    var matchFilter = curFilter==='all' || q.level===curFilter || (curFilter==='marked' && done.has(q.id));
+    var matchSearch = curSearch==='' || q.q.toLowerCase().indexOf(curSearch.toLowerCase())>=0 || q.ans.toLowerCase().indexOf(curSearch.toLowerCase())>=0;
+    return matchFilter && matchSearch;
+  });
+  if(filtered.length===0){container.innerHTML='<div class="no-results">No questions match your search.</div>';return;}
+  var byLevel = {};
+  filtered.forEach(function(q){
+    if(!byLevel[q.level]) byLevel[q.level]=[];
+    byLevel[q.level].push(q);
+  });
+  var order = ['basic','intermediate','advanced'];
+  var levelLabels = {basic:'🟢 Basic Level (Q1–15)',intermediate:'🟡 Intermediate Level (Q16–35)',advanced:'🔴 Advanced Level (Q36–50)'};
+  var html = '';
+  order.forEach(function(lv){
+    if(!byLevel[lv]) return;
+    html += '<div class="cat-label">'+levelLabels[lv]+'</div>';
+    byLevel[lv].forEach(function(q){
+      var numClass = lv==='basic'?'qnum-b':lv==='intermediate'?'qnum-m':'qnum-a';
+      var tagHtml = q.tags.map(function(t,i){return '<span class="tag '+t+'">'+q.tagNames[i]+'</span>';}).join('');
+      var projHtml = q.proj?'<div class="proj-box"><div class="proj-label">Real project example</div>'+q.proj+'</div>':'';
+      var doneClass = done.has(q.id)?'marked':'';
+      html += '<div class="qcard'+(done.has(q.id)?' done-card':'')+'" id="qc-'+q.id+'" style="'+(done.has(q.id)?'opacity:0.7':'')+'">'+
+        '<div class="qhead" onclick="tog('+q.id+')">'+
+        '<div class="qnum '+numClass+'">'+q.id+'</div>'+
+        '<div class="qtext">'+q.q+'</div>'+
+        '<span class="qarr">▼</span>'+
+        '</div>'+
+        '<div class="abody" id="ab-'+q.id+'">'+
+        '<div class="atags">'+tagHtml+'</div>'+
+        '<div class="ans">'+q.ans+'</div>'+
+        projHtml+
+        '<button class="done-btn '+doneClass+'" onclick="markDone(event,'+q.id+')">'+(done.has(q.id)?'✓ Reviewed':'Mark as reviewed')+'</button>'+
+        '</div>'+
+        '</div>';
+    });
+  });
+  container.innerHTML = html;
+  var fills = document.querySelectorAll('.body.show');
+  fills.forEach(function(b){b.classList.add('show');});
+  updateProg();
+}
+
+function tog(id){
+  var c=document.getElementById('qc-'+id);
+  var b=document.getElementById('ab-'+id);
+  if(!b)return;
+  var o=b.classList.contains('show');
+  b.classList.toggle('show',!o);
+  if(c) c.classList.toggle('open',!o);
+}
+function filter(f,el){
+  curFilter=f;
+  document.querySelectorAll('.ftab').forEach(function(t){t.classList.remove('on');});
+  el.classList.add('on');
+  render();
+}
+function doSearch(v){curSearch=v;render();}
+function markDone(e,id){
+  e.stopPropagation();
+  if(done.has(id))done.delete(id);else done.add(id);
+  updateProg();
+  render();
+  var b=document.getElementById('ab-'+id);
+  if(b) b.classList.add('show');
+  var c=document.getElementById('qc-'+id);
+  if(c) c.classList.add('open');
+}
+function updateProg(){
+  var pct=Math.round((done.size/50)*100);
+  var fill=document.getElementById('prog-fill');
+  var text=document.getElementById('prog-text');
+  if(fill) fill.style.width=pct+'%';
+  if(text) text.textContent=done.size+' / 50 reviewed';
+}
+render();
+</script>

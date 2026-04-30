@@ -12,6 +12,7 @@ import Skills from './pages/Skills/Skills';
 import Experience from './pages/Experience/Experience';
 import LiveProof from './pages/LiveProof/LiveProof';
 import Certifications from './pages/Certifications/Certifications';
+import InterviewPreparation from './pages/InterviewPreparation/InterviewPreparation';
 import Contact from './pages/Contact/Contact';
 import './assets/styles/style.css';
 
@@ -40,6 +41,7 @@ function App() {
         <Route path="/experience" element={<Experience />} />
         <Route path="/live-proof" element={<LiveProof />} />
         <Route path="/certifications" element={<Certifications />} />
+        <Route path="/interview-prep" element={<InterviewPreparation />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>
       <Modals activeModal={activeModal} onClose={handleCloseModal} />
